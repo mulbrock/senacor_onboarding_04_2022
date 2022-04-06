@@ -7,10 +7,10 @@
     <changeSet id="task 3 - create person_group table" author="sevket.goekay">
 
         <createTable tableName="group_person">
-            <column name="group_id" type="bigserial">
+            <column name="group_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_id" type="bigserial">
+            <column name="person_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>

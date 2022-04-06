@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,7 @@ public class Person {
         name = "group_person",
         joinColumns = {@JoinColumn(name = "person_id")},
         inverseJoinColumns = {@JoinColumn(name = "group_id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Group> groups = new HashSet<>();
 
