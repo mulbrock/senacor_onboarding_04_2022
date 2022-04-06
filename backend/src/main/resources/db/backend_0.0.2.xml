@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="task 3 - create person_group table" author="sevket.goekay">
+
+        <createTable tableName="group_person">
+            <column name="group_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="person_id" type="bigserial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="group_person"
+                             columnNames="group_id, person_id"
+                             constraintName="group_person_ids_ix1"/>
+
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="group_person"
+                                 constraintName="fk_group_person_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="group"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="group_person"
+                                 constraintName="fk_group_person_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+    </changeSet>
+
+</databaseChangeLog>
