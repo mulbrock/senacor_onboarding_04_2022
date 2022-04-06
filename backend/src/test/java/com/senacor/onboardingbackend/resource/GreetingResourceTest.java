@@ -1,4 +1,4 @@
-package com.senacor.onboardingbackend;
+package com.senacor.onboardingbackend.resource;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;

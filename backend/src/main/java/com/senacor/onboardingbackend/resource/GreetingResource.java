@@ -1,4 +1,4 @@
-package com.senacor.onboardingbackend;
+package com.senacor.onboardingbackend.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
