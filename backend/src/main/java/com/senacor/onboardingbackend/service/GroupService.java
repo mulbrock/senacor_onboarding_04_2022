@@ -3,6 +3,7 @@ package com.senacor.onboardingbackend.service;
 import com.senacor.onboardingbackend.datatransferobject.GroupDTO;
 import com.senacor.onboardingbackend.domainobject.Group;
 import com.senacor.onboardingbackend.exception.NotFoundException;
+import com.senacor.onboardingbackend.exception.WasDeletedException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
@@ -24,6 +25,9 @@ public class GroupService {
         Group entity = em.find(Group.class, id);
         if (entity == null) {
             throw new NotFoundException("Cannot find Group with id=" + id);
+        }
+        if (entity.isDeleted()) {
+            throw new WasDeletedException("Group with id=" + id + " was deleted before");
         }
         return entity;
     }
@@ -54,12 +58,15 @@ public class GroupService {
 
     @Transactional
     public void deleteById(Long id) {
-        Group entity = get(id);
+        Group entity;
+        try {
+            entity = get(id);
+        } catch (WasDeletedException e) {
+            // idempotency. already deleted.
+            return;
+        }
 
-        em.createNativeQuery("delete from group_person where group_id = :group_id")
-            .setParameter("group_id", id)
-            .executeUpdate();
-
-        em.remove(entity);
+        entity.setDeleted(true);
+        em.merge(entity);
     }
 }

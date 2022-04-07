@@ -32,6 +32,7 @@ public class PersonDTO {
         private String firstName;
         private String lastName;
         private Integer age;
+        private Boolean deleted;
         private List<GroupInReadPersonDTO> groups;
     }
 
@@ -41,5 +42,6 @@ public class PersonDTO {
         private Long id;
         private OffsetDateTime dateCreated;
         private OffsetDateTime dateMeeting;
+        private Boolean deleted;
     }
 }

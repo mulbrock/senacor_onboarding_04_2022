@@ -37,6 +37,9 @@ public class Group {
     @ToString.Exclude
     private Set<Person> persons = new HashSet<>();
 
+    @Column(name = "deleted")
+    private boolean deleted = false;
+
     /**
      * Don't change this
      */

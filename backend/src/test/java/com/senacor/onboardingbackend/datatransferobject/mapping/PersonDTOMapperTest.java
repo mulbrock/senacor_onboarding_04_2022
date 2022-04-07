@@ -27,6 +27,7 @@ public class PersonDTOMapperTest {
         assertEquals(person.getFirstName(), dto.getFirstName());
         assertEquals(person.getLastName(), dto.getLastName());
         assertEquals(person.getAge(), dto.getAge());
+        assertEquals(person.isDeleted(), dto.getDeleted());
         assertEquals(person.getGroups().size(), dto.getGroups().size());
 
         for (Group group : person.getGroups()) {
@@ -49,5 +50,6 @@ public class PersonDTOMapperTest {
         assertEquals(group.getId(), groupDto.getId());
         assertEquals(group.getDateCreated(), groupDto.getDateCreated());
         assertEquals(group.getDateMeeting(), groupDto.getDateMeeting());
+        assertEquals(group.isDeleted(), groupDto.getDeleted());
     }
 }

@@ -37,6 +37,9 @@ public class Person {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "deleted")
+    private boolean deleted = false;
+
     @JoinTable(
         name = "group_person",
         joinColumns = {@JoinColumn(name = "person_id")},

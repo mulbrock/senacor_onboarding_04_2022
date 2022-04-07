@@ -4,6 +4,7 @@ import com.senacor.onboardingbackend.datatransferobject.PersonDTO;
 import com.senacor.onboardingbackend.domainobject.Group;
 import com.senacor.onboardingbackend.domainobject.Person;
 import com.senacor.onboardingbackend.exception.NotFoundException;
+import com.senacor.onboardingbackend.exception.WasDeletedException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,9 @@ public class PersonService {
         Person entity = em.find(Person.class, id);
         if (entity == null) {
             throw new NotFoundException("Cannot find Person with id=" + id);
+        }
+        if (entity.isDeleted()) {
+            throw new WasDeletedException("Person with id=" + id + " was deleted before");
         }
         return entity;
     }
@@ -49,13 +53,16 @@ public class PersonService {
 
     @Transactional
     public void deleteById(Long id) {
-        Person entity = get(id);
+        Person entity;
+        try {
+            entity = get(id);
+        } catch (WasDeletedException e) {
+            // idempotency. already deleted.
+            return;
+        }
 
-        em.createNativeQuery("delete from group_person where person_id = :person_id")
-            .setParameter("person_id", id)
-            .executeUpdate();
-
-        em.remove(entity);
+        entity.setDeleted(true);
+        em.merge(entity);
     }
 
     public void addToGroup(Set<Long> personIds, Group group) {

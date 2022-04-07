@@ -24,6 +24,7 @@ public class PersonDTOMapper {
             .firstName(person.getFirstName())
             .lastName(person.getLastName())
             .age(person.getAge())
+            .deleted(person.isDeleted())
             .groups(person.getGroups().stream().map(PersonDTOMapper::map).collect(Collectors.toList()))
             .build();
     }
@@ -34,6 +35,7 @@ public class PersonDTOMapper {
             .id(group.getId())
             .dateCreated(group.getDateCreated())
             .dateMeeting(group.getDateMeeting())
+            .deleted(group.isDeleted())
             .build();
     }
 }
