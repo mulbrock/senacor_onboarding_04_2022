@@ -5,7 +5,7 @@ services:
   # but you can use the name of your choice.
   # Note: This may change the commands you are going to use a little bit.
   database:
-    image: 'postgres:latest'
+    image: 'postgres:14.2'
     ports:
       - 5432:5432
     environment:
