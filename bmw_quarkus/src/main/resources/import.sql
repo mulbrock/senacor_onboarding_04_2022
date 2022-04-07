@@ -1,0 +1,2 @@
+-- INSERT INTO person(id, firstname, lastname, age) VALUES (55, 'Georgi', 'Mavrov', 27);
+-- INSERT INTO groups(creatingTime, meetingTime) VALUES ('12.12.2021', '12.01.2022');
