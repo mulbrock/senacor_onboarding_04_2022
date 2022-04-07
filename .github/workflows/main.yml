@@ -1,0 +1,40 @@
+name: build, run tests and start app
+
+on:
+ push:
+    branches: goekay
+
+jobs:
+  build_and_test:
+
+    runs-on: ubuntu-latest
+
+    services:
+          postgres:
+            image: postgres
+            env:
+              POSTGRES_USER: postgres
+              POSTGRES_PASSWORD: postgres
+              POSTGRES_DB: default_database
+            ports:
+              - 5432:5432
+            options: --health-cmd pg_isready --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Build project with Maven
+      working-directory: ./backend
+      run: mvn -B clean package --file pom.xml
+
+    - name: Start the app and make it say hello world
+      working-directory: ./backend
+      run: |
+        java -jar ./target/quarkus-app/quarkus-run.jar &
+        sleep 10
+        curl -w "\n" http://localhost:8080/hello
+        killall java
