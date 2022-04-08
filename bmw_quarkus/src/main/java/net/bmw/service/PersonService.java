@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @ApplicationScoped
 public class PersonService {
@@ -41,8 +42,14 @@ public class PersonService {
             return foundPerson;
         }
 
-        foundPerson.addGroup(group);
+        foundPerson.addGroup(groupService.create(group));
         return foundPerson;
+    }
+
+    @Transactional
+    public Set<Group> getAllGroupsByPersonId(Long personId) {
+        Person foundPerson = getById(personId);
+        return foundPerson.getGroups();
     }
 
     @Transactional

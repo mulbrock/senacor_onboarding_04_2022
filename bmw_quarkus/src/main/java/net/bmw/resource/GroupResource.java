@@ -28,11 +28,22 @@ public class GroupResource {
 
     }
 
+    @GET
+    @Path("/{id}/persons")
+    public Response getAllPersonsByGroupId(@PathParam("id") Long id) {
+        return Response.ok(groupService.getAllPersonsByGroupId(id)).build();
+    }
+
     @POST
     public Response createGroup(Group group) {
         return Response.ok(groupService.create(group)).build();
     }
 
+    @POST
+    @Path("/{id}/persons/{personId}")
+    public Response addPerson(@PathParam("id") Long id, @PathParam("personId") Long personId) {
+        return Response.ok(groupService.addPerson(id, personId)).build();
+    }
     @PUT
     @Path("/{id}")
     public Response updateGroup(@PathParam("id") Long id, Group group) {

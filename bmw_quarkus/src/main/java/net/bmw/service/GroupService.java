@@ -1,6 +1,7 @@
 package net.bmw.service;
 
 import net.bmw.model.Group;
+import net.bmw.model.Person;
 import net.bmw.repository.GroupRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 //TODO: Add Logger
 @ApplicationScoped
@@ -16,10 +18,22 @@ public class GroupService {
     @Inject
     GroupRepository groupRepository;
 
+    @Inject
+    PersonService personService;
+
     @Transactional
     public Group create(Group group) {
         groupRepository.persist(group);
         return group;
+    }
+
+    @Transactional
+    public Group addPerson(Long groupId, Long personId) {
+        Group foundGroup = getById(groupId);
+        Person foundPerson = personService.getById(personId);
+
+        foundGroup.addPerson(foundPerson);
+        return foundGroup;
     }
 
     @Transactional
@@ -32,6 +46,13 @@ public class GroupService {
     @Transactional
     public List<Group> getAll() {
         return groupRepository.listAll();
+    }
+
+    @Transactional
+    public Set<Person> getAllPersonsByGroupId(Long groupId) {
+
+        Group foundGroup = getById(groupId);
+        return foundGroup.getPersons();
     }
 
     @Transactional
@@ -53,15 +74,6 @@ public class GroupService {
     public void deleteAll() {
         groupRepository.deleteAll();
     }
-
-//    //TODO: Implement me
-//    @Transactional
-//    public Group addPerson(Long personId, Long groupId) {
-//        Group foundGroup = groupRepository.findById(groupId);
-//
-//        foundGroup.getPersons().add()
-//        return null;
-//    }
 
     public Long countGroup() {
         return groupRepository.count();

@@ -29,6 +29,12 @@ public class PersonResource {
         return Response.ok(personService.getAll()).build();
     }
 
+    @GET
+    @Path("/{id}/groups")
+    public Response getAllGroupsOfPerson(@PathParam("id") Long id) {
+        return Response.ok(personService.getAllGroupsByPersonId(id)).build();
+    }
+
     @POST
     @Transactional
     public Response createPerson(Person person) {

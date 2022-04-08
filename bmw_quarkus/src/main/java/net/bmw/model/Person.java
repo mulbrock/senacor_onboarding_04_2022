@@ -1,6 +1,6 @@
 package net.bmw.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,15 +9,16 @@ import java.util.Set;
 @Entity
 @Table(name = "person")
 //TODO: Remove Getter and Setter and use PanacheEntity
-public class Person extends PanacheEntity {
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     private Integer age;
 
-    //    TODO: Check the JoinTable
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-            @JoinTable(name= "person_group", joinColumns = @JoinColumn(name="person_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name= "person_group", joinColumns = @JoinColumn(name="person_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     Set<Group> groups = new HashSet<>();
 
     public Person() {
@@ -69,7 +70,7 @@ public class Person extends PanacheEntity {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
+    public Set<Group> getGroups() {
+        return groups;
     }
 }
