@@ -22,6 +22,13 @@ public class GroupResource {
 
     private GroupService groupService;
 
+    @Operation(summary = "Creates a new group with a random number of people and a random future meeting date")
+    @Path("/random")
+    @POST
+    public GroupDTO.ReadGroupDTO createRandom() {
+        return GroupDTOMapper.map(groupService.createRandom());
+    }
+
     @Operation(summary = "Creates a new group with the specified meeting date and adds the persons with the specified ids to it")
     @POST
     public GroupDTO.ReadGroupDTO create(@Valid GroupDTO.CreateGroupDTO toCreate) {

@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 import static com.senacor.onboardingbackend.Fixtures.existsInGroup;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.in;
 
 @QuarkusTest
 public class GroupServiceDatabaseTest extends PostgresDatabaseTest {
@@ -52,6 +55,25 @@ public class GroupServiceDatabaseTest extends PostgresDatabaseTest {
         Assertions.assertEquals(2, fromDB.getPersons().size());
         Assertions.assertTrue(existsInGroup(fromDB, saved1.getId()));
         Assertions.assertTrue(existsInGroup(fromDB, saved2.getId()));
+    }
+
+    @Test
+    public void testCreateRandom() {
+        Person p1 = saveRandomPerson();
+        Person p2 = saveRandomPerson();
+        Person p3 = saveRandomPerson();
+        Person p4 = saveRandomPerson();
+        Set<Person> allPersons = Set.of(p1, p2, p3, p4);
+
+        Group fromJava = groupService.createRandom();
+        Group fromDB = findGroup(fromJava.getId());
+
+        Assertions.assertNotNull(fromDB.getId());
+        Assertions.assertNotNull(fromDB.getDateCreated());
+        Assertions.assertNotNull(fromDB.getDateMeeting());
+        Assertions.assertNotEquals(0, fromDB.getPersons().size());
+
+        assertThat(fromDB.getPersons(), everyItem(in(allPersons)));
     }
 
     @Test

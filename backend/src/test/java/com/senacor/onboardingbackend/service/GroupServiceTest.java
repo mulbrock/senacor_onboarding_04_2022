@@ -2,6 +2,7 @@ package com.senacor.onboardingbackend.service;
 
 import com.senacor.onboardingbackend.datatransferobject.GroupDTO;
 import com.senacor.onboardingbackend.domainobject.Group;
+import com.senacor.onboardingbackend.domainobject.Person;
 import com.senacor.onboardingbackend.exception.NotFoundException;
 import com.senacor.onboardingbackend.exception.WasDeletedException;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.senacor.onboardingbackend.Fixtures.dummyGroup;
+import static com.senacor.onboardingbackend.Fixtures.dummyPerson;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -83,6 +85,22 @@ public class GroupServiceTest {
 
         verify(em).persist(actual);
         verify(personService).addToGroup(toCreate.getPersonIds(), actual);
+    }
+
+    @Test
+    public void testCreateRandom() {
+        Person p1 = dummyPerson();
+        Person p2 = dummyPerson();
+
+        when(personService.getAll()).thenReturn(List.of(p1, p2));
+
+        Group actual = groupService.createRandom();
+
+        Assertions.assertNotNull(actual.getDateCreated());
+        Assertions.assertNotNull(actual.getDateMeeting());
+
+        verify(em).persist(actual);
+        verify(personService).addToGroup(Set.of(p1.getId(), p2.getId()), actual);
     }
 
     @Test

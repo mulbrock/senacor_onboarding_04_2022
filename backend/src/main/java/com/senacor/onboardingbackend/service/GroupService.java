@@ -2,6 +2,7 @@ package com.senacor.onboardingbackend.service;
 
 import com.senacor.onboardingbackend.datatransferobject.GroupDTO;
 import com.senacor.onboardingbackend.domainobject.Group;
+import com.senacor.onboardingbackend.domainobject.Person;
 import com.senacor.onboardingbackend.exception.NotFoundException;
 import com.senacor.onboardingbackend.exception.WasDeletedException;
 import lombok.AccessLevel;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -45,6 +47,30 @@ public class GroupService {
         em.persist(entity);
 
         personService.addToGroup(toCreate.getPersonIds(), entity);
+
+        return entity;
+    }
+
+    @Transactional
+    public Group createRandom() {
+        GroupCreateStrategy strategy = new GroupCreateStrategy();
+
+        Group entity = new Group();
+        entity.setDateCreated(OffsetDateTime.now());
+        entity.setDateMeeting(strategy.pickRandomTime(entity.getDateCreated()));
+        em.persist(entity);
+
+        List<Person> validPersons = personService.getAll()
+            .stream()
+            .filter(it -> !it.isDeleted())
+            .collect(Collectors.toList());
+
+        Set<Long> randomPersonIds = strategy.pickRandomPersons(validPersons)
+            .stream()
+            .map(Person::getId)
+            .collect(Collectors.toSet());
+
+        personService.addToGroup(randomPersonIds, entity);
 
         return entity;
     }

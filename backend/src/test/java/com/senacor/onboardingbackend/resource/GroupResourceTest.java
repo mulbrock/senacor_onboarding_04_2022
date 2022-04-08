@@ -46,6 +46,16 @@ public class GroupResourceTest {
             .then().statusCode(200);
     }
 
+    @Test
+    public void testCreateRandom() {
+        when(groupService.createRandom()).thenReturn(dummyGroup());
+
+        given()
+            .accept(ContentType.JSON)
+            .contentType(ContentType.JSON)
+            .when().post(path + "/random")
+            .then().statusCode(200);
+    }
 
     @Test
     public void testCreate_invalidDateMeeting() {
