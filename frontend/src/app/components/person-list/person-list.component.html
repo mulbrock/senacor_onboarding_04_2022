@@ -1,0 +1,30 @@
+<div class="list row">
+
+  <div class="col-md-6">
+    <a class="btn btn-success mb-4" href="/person-create" role="button">Create Person</a>
+    <h4>Person List</h4>
+  </div>
+
+  <table class="table table-hover clickable-row">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Deleted?</th>
+      <th scope="col"># of groups</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons" (click)="selectPerson(person)">
+      <td>{{person.id}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.age}}</td>
+      <td>{{person.deleted}}</td>
+      <td>{{person.groups.length}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

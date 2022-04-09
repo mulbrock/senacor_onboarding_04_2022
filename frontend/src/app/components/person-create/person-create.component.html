@@ -1,0 +1,31 @@
+<form>
+
+  <div class="form-group row mb-2">
+    <label for="firstName" class="col-sm-2 col-form-label">First name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="lastName" class="col-sm-2 col-form-label">Last name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="age" class="col-sm-2 col-form-label">Age</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="age" name="age" [(ngModel)]="person.age">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <button (click)="createPerson()" class="btn btn-success">Create</button>
+    </div>
+  </div>
+
+</form>

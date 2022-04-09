@@ -1,0 +1,28 @@
+<div class="list row">
+
+  <div class="col-md-6">
+    <a class="btn btn-success mb-4" role="button" (click)="createRandomGroup()">Create Random Group</a>
+    <h4>Group List</h4>
+  </div>
+
+  <table class="table table-hover clickable-row">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Meeting date</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Deleted?</th>
+      <th scope="col"># of persons</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let group of groups" (click)="selectGroup(group)">
+      <td>{{group.id}}</td>
+      <td>{{group.dateMeeting}}</td>
+      <td>{{group.dateCreated}}</td>
+      <td>{{group.deleted}}</td>
+      <td>{{group.persons.length}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

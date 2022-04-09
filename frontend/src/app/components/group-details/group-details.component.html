@@ -1,0 +1,70 @@
+<div class="col-md-6 mb-4 justify-content-between">
+  <h4>Group Details</h4>
+</div>
+
+<div *ngIf="!group" class="alert alert-danger" role="alert">
+  <p>This group does not exist.</p>
+</div>
+
+<div *ngIf="group">
+  <form>
+    <div class="form-group row">
+      <label for="id" class="col-sm-2 col-form-label">ID</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="id" value="{{group.id}}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="dateMeeting" class="col-sm-2 col-form-label">Meeting date</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="dateMeeting" value="{{group.dateMeeting}}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="dateCreated" class="col-sm-2 col-form-label">Created at</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="dateCreated" value="{{group.dateCreated}}">
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+      <label for="isDeleted" class="col-sm-2 col-form-label">Deleted?</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="isDeleted" value="{{group.deleted}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-danger" (click)="deleteGroup()">Delete</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="col-md-6 mt-5">
+    <h4>{{group.persons.length}} persons in this group:</h4>
+  </div>
+
+  <table class="table table-hover clickable-row">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Deleted?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of group.persons" (click)="selectPerson(person)">
+      <td>{{person.id}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.age}}</td>
+      <td>{{person.deleted}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,74 @@
+<div class="col-md-6 mb-4 justify-content-between">
+  <h4>Person Details</h4>
+</div>
+
+<div *ngIf="!person" class="alert alert-danger" role="alert">
+  <p>This person does not exist.</p>
+</div>
+
+<div *ngIf="person">
+  <form>
+    <div class="form-group row">
+      <label for="id" class="col-sm-2 col-form-label">ID</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="id" value="{{person.id}}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="isDeleted" class="col-sm-2 col-form-label">Deleted?</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control-plaintext" id="isDeleted" value="{{person.deleted}}">
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+      <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="person.firstName">
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+      <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="person.lastName">
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+      <label for="age" class="col-sm-2 col-form-label">Age</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="age" name="age" [(ngModel)]="person.age">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <button class="btn btn-primary" (click)="updatePerson()">Update</button>
+        <button class="m-lg-2 btn btn-danger" (click)="deletePerson()">Delete</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="col-md-6 mt-5">
+    <h4>This person is in {{person.groups.length}} groups:</h4>
+  </div>
+
+  <table class="table table-hover clickable-row">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Meeting date</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Deleted?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let group of person.groups" (click)="selectGroup(group)">
+      <td>{{group.id}}</td>
+      <td>{{group.dateMeeting}}</td>
+      <td>{{group.dateCreated}}</td>
+      <td>{{group.deleted}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
