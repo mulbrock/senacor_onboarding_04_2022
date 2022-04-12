@@ -3,6 +3,7 @@ package net.bmw.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     private String creatingTime;
     private String meetingTime;
 
@@ -60,5 +62,15 @@ public class Group {
     public void addPerson(Person person) {
         this.persons.add(person);
         person.getGroups().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", creatingTime='" + creatingTime + '\'' +
+                ", meetingTime='" + meetingTime + '\'' +
+                ", persons=" + persons +
+                '}';
     }
 }

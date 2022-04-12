@@ -33,16 +33,16 @@ public class PersonService {
     @Transactional
     public Person assignGroupToPerson(Long personId, Group group) {
         Person foundPerson = getById(personId);
-        long groupId = group.getId();
-
         // Check if the group already exist
-        if(groupId != 0L) {
-            Group foundGroup = groupService.getById(group.getId());
-            foundPerson.addGroup(foundGroup);
-            return foundPerson;
-        }
-
         foundPerson.addGroup(groupService.create(group));
+        return foundPerson;
+    }
+
+    @Transactional
+    public Person assignGroupToPersonByGroupId(Long personId, Long groupId) {
+        Person foundPerson = getById(personId);
+        // Check if the group already exist
+        foundPerson.addGroup(groupService.getById(groupId));
         return foundPerson;
     }
 

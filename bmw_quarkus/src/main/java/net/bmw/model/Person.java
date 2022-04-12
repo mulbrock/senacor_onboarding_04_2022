@@ -3,25 +3,34 @@ package net.bmw.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "person")
-//TODO: Remove Getter and Setter and use PanacheEntity
+@Table(name = "persons")
+// TODO: Remove Getter and Setter and use PanacheEntity or Lombok
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "firstName may not be blank.")
     private String firstName;
+    @NotBlank(message = "lastName may not be blank.")
     private String lastName;
     private Integer age;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name= "person_group", joinColumns = @JoinColumn(name="person_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @JoinTable(name= "persons_group", joinColumns = @JoinColumn(name="persons_id"), inverseJoinColumns = @JoinColumn(name = "groups_id"))
     Set<Group> groups = new HashSet<>();
 
     public Person() {
+    }
+
+    public Person(String firstName, String lastName, Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
 
     public Long getId() {

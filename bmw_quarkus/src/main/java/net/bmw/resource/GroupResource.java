@@ -1,31 +1,39 @@
 package net.bmw.resource;
 
+import net.bmw.dto.GroupDto;
+import net.bmw.mapper.GroupMapper;
+import net.bmw.mapper.PersonMapper;
 import net.bmw.model.Group;
 import net.bmw.service.GroupService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/group")
+@Path("/groups")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class GroupResource {
     @Inject
     GroupService groupService;
 
+    @Inject
+    GroupMapper groupMapper;
+
+    @Inject
+    PersonMapper personMapper;
+
     @GET
-    @Path("/all")
     public Response getAll() {
-        return Response.ok(groupService.getAll()).build();
+        return Response.ok(groupMapper.toDtoList(groupService.getAll())).build();
     }
 
     @GET
     @Path("/{id}")
     public Response getGroup(@PathParam("id") Long id) {
-        return Response.ok(groupService.getById(id)).build();
-
+        return Response.ok(groupMapper.toDto(groupService.getById(id))).build();
     }
 
     @GET
@@ -35,8 +43,9 @@ public class GroupResource {
     }
 
     @POST
-    public Response createGroup(Group group) {
-        return Response.ok(groupService.create(group)).build();
+    public Response createGroup(@Valid GroupDto groupDto) {
+        Group createdGroup = groupService.create(groupMapper.toEntity(groupDto));
+        return Response.ok(groupMapper.toDto(createdGroup)).build();
     }
 
     @POST

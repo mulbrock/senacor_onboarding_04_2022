@@ -1,5 +1,7 @@
 package net.bmw.service;
 
+import net.bmw.dto.GroupDto;
+import net.bmw.mapper.GroupMapper;
 import net.bmw.model.Group;
 import net.bmw.model.Person;
 import net.bmw.repository.GroupRepository;
@@ -11,6 +13,7 @@ import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 //TODO: Add Logger
 @ApplicationScoped
@@ -20,6 +23,9 @@ public class GroupService {
 
     @Inject
     PersonService personService;
+
+    @Inject
+    GroupMapper groupMapper;
 
     @Transactional
     public Group create(Group group) {
@@ -40,7 +46,7 @@ public class GroupService {
     public Group getById(Long id) {
         Optional<Group> optional = groupRepository.findByIdOptional(id);
 
-        return optional.orElseThrow(() -> new NotFoundException("Group with id" + id + "does not exist"));
+        return optional.orElseThrow(() -> new NotFoundException("Group with id " + id + " does not exist"));
     }
 
     @Transactional
@@ -50,7 +56,6 @@ public class GroupService {
 
     @Transactional
     public Set<Person> getAllPersonsByGroupId(Long groupId) {
-
         Group foundGroup = getById(groupId);
         return foundGroup.getPersons();
     }
