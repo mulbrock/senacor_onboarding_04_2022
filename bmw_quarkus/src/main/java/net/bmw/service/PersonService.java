@@ -76,6 +76,17 @@ public class PersonService {
     }
 
     @Transactional
+    public Person update(Person person) {
+        Person foundPerson = getById(person.getId());
+
+        foundPerson.setFirstName(person.getFirstName());
+        foundPerson.setLastName(person.getLastName());
+        foundPerson.setAge(person.getAge());
+
+        return foundPerson;
+    }
+
+    @Transactional
     //Second approach of deleting an entity
     public void deleteById(Long id) {
         Person foundPerson = getById(id);

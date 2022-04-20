@@ -1,0 +1,24 @@
+<h1>All people</h1>
+<ul>
+  <li *ngFor="let person of people">
+    <button [class.selected]="person === selectedPerson" type="button">
+      <a routerLink="/detail/{{person.id}}">
+        <span class="badge">{{person.id}} </span>
+        <span class="name">{{person.firstName}} </span>
+        <span class="name">{{person.lastName}} </span>
+        <span class="age">{{person.age}} </span>
+      </a>
+    </button>
+  </li>
+</ul>
+
+<h1>Create Person</h1>
+<form #personForm="ngForm" novalidate (ngSubmit)="onSubmit()" >
+  <label>First name</label>
+  <input id="firstName" name="firstName" placeholder="Enter your firstname" type="text" required [(ngModel)]="personModel.firstName" />
+  <label>Last name</label>
+  <input id="lastName" name="lastName" placeholder="Enter your lastname" type="text" required [(ngModel)]="personModel.lastName" />
+  <label>Age</label>
+  <input id="age" name="age" placeholder="Enter your age" type="number" required [(ngModel)]="personModel.age" />
+  <button class="btn btn-primary" type="submit">Create Person</button>
+</form>

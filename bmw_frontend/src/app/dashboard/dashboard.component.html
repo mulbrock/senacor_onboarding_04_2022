@@ -1,0 +1,6 @@
+<h2>Top People</h2>
+<div class="people-menu">
+  <a *ngFor="let person of people" routerLink="/detail/{{person.id}}">
+    {{person.firstName}}
+  </a>
+</div>

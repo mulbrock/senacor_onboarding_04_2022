@@ -12,7 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/groups")
+@Path("/api/v1/groups")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON})
 public class GroupResource {
@@ -43,8 +43,8 @@ public class GroupResource {
     }
 
     @POST
-    public Response createGroup(@Valid GroupDto groupDto) {
-        Group createdGroup = groupService.create(groupMapper.toEntity(groupDto));
+    public Response createGroup(@Valid Group group) {
+        Group createdGroup = groupService.create(group);
         return Response.ok(groupMapper.toDto(createdGroup)).build();
     }
 

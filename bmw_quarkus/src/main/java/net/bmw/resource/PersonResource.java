@@ -15,7 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/persons")
+@Path("/api/v1/persons")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PersonResource {
@@ -67,6 +67,11 @@ public class PersonResource {
     @Path("/{id}")
     public Response updatePerson(@PathParam("id") Long id, Person person) {
         return Response.ok(personService.update(id, person)).build();
+    }
+
+    @PUT
+    public Response updatePerson(Person person) {
+        return Response.ok(personService.update(person)).build();
     }
 
     @DELETE
