@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping />
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/code-with-quarkus/target/classes" />
     <output-test url="file://$MODULE_DIR$/code-with-quarkus/target/test-classes" />
@@ -180,5 +190,44 @@
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured-common:4.5.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:xml-path:4.5.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-hibernate-orm-panache:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-hibernate-orm:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-agroal:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-datasource:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-datasource-common:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.agroal:agroal-api:1.16" level="project" />
+    <orderEntry type="library" name="Maven: io.agroal:agroal-narayana:1.16" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss:jboss-transaction-spi:7.6.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.agroal:agroal-pool:1.16" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-credentials:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-narayana-jta:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-transaction-annotations:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye:smallrye-context-propagation-jta:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye.reactive:smallrye-reactive-converter-api:2.7.0" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye.reactive:smallrye-reactive-converter-mutiny:2.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.narayana.jta:narayana-jta:5.12.6.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.resource:jboss-connector-api_1.7_spec:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.narayana.jts:narayana-jts-integration:5.12.6.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.6.9.Final" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.12.9" level="project" />
+    <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:5.1.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-graalvm:5.6.9.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.3-b02" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.3-b02" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.10" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.sun.activation:jakarta.activation:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.spec.javax.xml.bind:jboss-jaxb-api_2.3_spec:2.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.persistence:jakarta.persistence-api:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:quarkus-local-cache:0.1.1" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-caffeine:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.github.ben-manes.caffeine:caffeine:2.9.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.errorprone:error_prone_annotations:2.13.1" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-hibernate-orm-panache-common:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-panache-hibernate-common:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-panache-common:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jdbc-postgresql:2.9.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.3.3" level="project" />
   </component>
 </module>
