@@ -3,37 +3,29 @@ package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Group extends PanacheEntity {
 
-    private long id;
+    @Column
     private Date creatingTime;
-    private Date meetingTime;
+    @Column
+    public Date meetingTime;
+    @Column
+    @ElementCollection
+    public List<Long> groupMembers;
 
     public Group() {
         this.creatingTime = new Date();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Date getCreatingTime() {
         return creatingTime;
     }
 
-    public Date getMeetingTime() {
-        return meetingTime;
-    }
-
-    public void setMeetingTime(Date meetingTime) {
-        this.meetingTime = meetingTime;
-    }
 }
