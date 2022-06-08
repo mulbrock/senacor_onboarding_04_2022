@@ -3,9 +3,7 @@ package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +14,13 @@ public class Group extends PanacheEntity {
     private Date creatingTime;
     @Column
     public Date meetingTime;
-    @Column
-    @ElementCollection
-    public List<Long> groupMembers;
+    @ManyToMany
+    @JoinTable(
+            name = "group_person",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
+    public List<Person> groupMembers;
 
     public Group() {
         this.creatingTime = new Date();
