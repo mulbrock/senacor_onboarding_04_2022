@@ -1,33 +1,25 @@
 package org.acme.data.entities;
 
-
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.sql.Date;
+import java.util.Set;
 
 @Entity
 public class Group extends PanacheEntity {
 
     @Column
-    private Date creatingTime;
+    private Date creationTime;
     @Column
     public Date meetingTime;
-    @ManyToMany
-    @JoinTable(
-            name = "group_person",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
-    public List<Person> groupMembers;
+    @ManyToMany(mappedBy = "groups")
+    private Set<Person> members;
 
-    public Group() {
-        this.creatingTime = new Date();
-    }
-
-    public Date getCreatingTime() {
-        return creatingTime;
+    public Set<Person> getMembers(){
+        return this.members;
     }
 
 }
