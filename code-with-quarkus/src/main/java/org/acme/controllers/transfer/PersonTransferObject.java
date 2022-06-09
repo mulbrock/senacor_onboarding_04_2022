@@ -9,6 +9,13 @@ import java.util.List;
 public class PersonTransferObject {
 
     @Data
+    public static class CreateUpdatePersonDTO{
+        private String firstName;
+        private String lastName;
+        private int age;
+    }
+
+    @Data
     @Builder
     public static class ReadPersonDTO{
         private Long id;

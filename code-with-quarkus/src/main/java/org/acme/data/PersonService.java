@@ -13,10 +13,7 @@ public class PersonService {
         for(Long id : personIDs){
             Person person = Person.findById(id);
             if (person != null){
-
                 person.getGroups().add(group);
-                group.getMembers().add(person);
-
             }
         }
     }

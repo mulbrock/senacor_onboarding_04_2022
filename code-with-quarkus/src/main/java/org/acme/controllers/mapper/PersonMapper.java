@@ -35,7 +35,7 @@ public class PersonMapper {
                 .builder()
                 .id(group.id)
                 .creationTime(group.getCreationTime())
-                .meetingTime(group.meetingTime)
+                .meetingTime(group.getMeetingTime())
                 .build();
     }
 

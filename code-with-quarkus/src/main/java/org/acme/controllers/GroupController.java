@@ -22,7 +22,7 @@ public class GroupController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(){
-        List<Group> groups = Group.listAll();
+        List<GroupTransferObject.ReadGroupDTO> groups = groupService.getAllGroups();
         return Response.ok(groups).build();
     }
 
@@ -30,10 +30,9 @@ public class GroupController {
     @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(GroupTransferObject groupTransferObject){
+    public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject){
 
         Group createdGroup = groupService.createGroup(groupTransferObject);
-        //personService.addToGroup(groupTransferObject.getMemberIDs(), createdGroup);
 
         return Response.ok(createdGroup).build();
     }

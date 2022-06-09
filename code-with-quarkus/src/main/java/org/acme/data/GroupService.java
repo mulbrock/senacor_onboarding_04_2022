@@ -1,10 +1,12 @@
 package org.acme.data;
 
+import org.acme.controllers.mapper.GroupMapper;
 import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
 import org.acme.controllers.transfer.GroupTransferObject;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
@@ -12,32 +14,20 @@ import java.util.List;
 @ApplicationScoped
 public class GroupService {
 
-    private PersonService personService = new PersonService();
-
-    /*
-    @Transactional
-    public List<Group> createGroups(int groupNumber){
-        List<Group> groups = new ArrayList<>(groupNumber);
-        for (int i = 0; i < groupNumber; i++){
-            Group group = new Group();
-            group.setMembers(new HashSet<>());
-            group.persist();
-            groups.add(group);
-        }
-        return groups;
-    }
-
-     */
+    @Inject
+    PersonService personService;
 
     @Transactional
-    public Group createGroup(GroupTransferObject groupTransferObject){
+    public Group createGroup(GroupTransferObject.CreateGroupDTO groupTransferObject){
         Group group = new Group();
+        group.setMeetingTime(groupTransferObject.getMeetingTime());
+
         group.setMembers(new HashSet<>());
-        //addPersonsToGroup(groupTransferObject.getMemberIDs(), group);
+        addPersonsToGroup(groupTransferObject.getMemberIDs(), group);
 
         group.persist();
 
-
+        personService.addToGroup(groupTransferObject.getMemberIDs(), group);
         return group;
     }
 
@@ -48,5 +38,10 @@ public class GroupService {
                 group.getMembers().add(person);
             }
         }
+    }
+
+    public List<GroupTransferObject.ReadGroupDTO> getAllGroups(){
+        List<Group> groups = Group.listAll();
+        return GroupMapper.map(groups);
     }
 }

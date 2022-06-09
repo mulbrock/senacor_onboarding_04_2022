@@ -22,7 +22,7 @@ public class GroupMapper {
                 .builder()
                 .id(group.id)
                 .creationTime(group.getCreationTime())
-                .meetingTime(group.meetingTime)
+                .meetingTime(group.getMeetingTime())
                 .groupMembers(group.getMembers().stream()
                         .map(GroupMapper::mapToMemberInGroupDTO)
                         .collect(Collectors.toList()))
