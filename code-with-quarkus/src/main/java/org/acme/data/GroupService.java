@@ -2,7 +2,7 @@ package org.acme.data;
 
 import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
-import org.acme.data.transfer.GroupTransferObject;
+import org.acme.controllers.transfer.GroupTransferObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
