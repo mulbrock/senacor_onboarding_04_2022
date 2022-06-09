@@ -1,4 +1,4 @@
-package org.acme.data;
+package org.acme.data.services;
 
 import org.acme.controllers.mapper.GroupMapper;
 import org.acme.data.entities.Group;
@@ -43,5 +43,10 @@ public class GroupService {
     public List<GroupTransferObject.ReadGroupDTO> getAllGroups(){
         List<Group> groups = Group.listAll();
         return GroupMapper.map(groups);
+    }
+
+    public GroupTransferObject.ReadGroupDTO getByID(Long id){
+        Group group = Group.findById(id);
+        return GroupMapper.map(group);
     }
 }

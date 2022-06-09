@@ -1,4 +1,4 @@
-package org.acme.data;
+package org.acme.data.services;
 
 import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.entities.Group;

@@ -2,7 +2,7 @@ package org.acme.controllers;
 
 import org.acme.controllers.mapper.GroupMapper;
 import org.acme.controllers.transfer.GroupTransferObject;
-import org.acme.data.GroupService;
+import org.acme.data.services.GroupService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -21,6 +21,14 @@ public class GroupController {
     public Response getAll(){
         List<GroupTransferObject.ReadGroupDTO> groups = groupService.getAllGroups();
         return Response.ok(groups).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getByID(@PathParam("id") Long id){
+        GroupTransferObject.ReadGroupDTO groupDTO = groupService.getByID(id);
+        return Response.ok(groupDTO).build();
     }
 
     @POST

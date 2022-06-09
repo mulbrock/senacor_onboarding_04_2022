@@ -2,7 +2,7 @@ package org.acme.controllers;
 
 import org.acme.controllers.mapper.PersonMapper;
 import org.acme.controllers.transfer.PersonTransferObject;
-import org.acme.data.PersonService;
+import org.acme.data.services.PersonService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
