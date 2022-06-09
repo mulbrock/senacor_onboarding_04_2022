@@ -5,7 +5,6 @@ import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.PersonService;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -66,7 +65,6 @@ public class PersonController {
     }
 
     @DELETE
-    @Transactional
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteById(@PathParam("id") Long id){
