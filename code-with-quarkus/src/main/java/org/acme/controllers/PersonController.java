@@ -3,7 +3,6 @@ package org.acme.controllers;
 import org.acme.controllers.mapper.PersonMapper;
 import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.PersonService;
-import org.acme.data.entities.Person;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -71,7 +70,7 @@ public class PersonController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteById(@PathParam("id") Long id){
-        boolean deleted = Person.deleteById(id);
+        boolean deleted = personService.deleteByID(id);
         if (deleted){
             return Response.noContent().build();
         } else {

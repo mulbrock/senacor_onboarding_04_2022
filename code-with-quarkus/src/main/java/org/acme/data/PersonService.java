@@ -38,6 +38,11 @@ public class PersonService {
         return false;
     }
 
+    @Transactional
+    public boolean deleteByID(Long personID){
+        return Person.deleteById(personID);
+    }
+
     private void populateDataFromDTO(Person person,
                                      PersonTransferObject.CreateUpdatePersonDTO personDTO){
         person.setFirstName(personDTO.getFirstName());
