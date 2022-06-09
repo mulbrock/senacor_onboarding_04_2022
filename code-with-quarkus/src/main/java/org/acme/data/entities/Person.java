@@ -1,19 +1,21 @@
 package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @Entity
 public class Person extends PanacheEntity {
 
     @Column
-    public String firstName;
+    private String firstName;
     @Column
-    public String lastName;
+    private String lastName;
     @Column
-    public int age;
+    private int age;
     @JoinTable(
             name = "person_group",
             joinColumns = { @JoinColumn(name = "person_id") },

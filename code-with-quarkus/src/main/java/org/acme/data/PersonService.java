@@ -1,5 +1,6 @@
 package org.acme.data;
 
+import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
 
@@ -8,6 +9,28 @@ import java.util.List;
 
 @ApplicationScoped
 public class PersonService {
+
+    public List<Person> getAllPersons(){
+        return Person.listAll();
+    }
+
+    public Person getByID(Long iD){
+        return Person.findById(iD);
+    }
+
+    public boolean create(PersonTransferObject.CreateUpdatePersonDTO personDTO){
+        Person person = new Person();
+        populateDataFromDTO(person, personDTO);
+        person.persist();
+        return person.isPersistent();
+    }
+
+    private void populateDataFromDTO(Person person,
+                                     PersonTransferObject.CreateUpdatePersonDTO personDTO){
+        person.setFirstName(personDTO.getFirstName());
+        person.setLastName(personDTO.getLastName());
+        person.setAge(personDTO.getAge());
+    }
 
     public void addToGroup(List<Long> personIDs, Group group){
         for(Long id : personIDs){

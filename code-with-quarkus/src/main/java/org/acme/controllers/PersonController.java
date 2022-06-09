@@ -1,7 +1,11 @@
 package org.acme.controllers;
 
+import org.acme.controllers.mapper.PersonMapper;
+import org.acme.controllers.transfer.PersonTransferObject;
+import org.acme.data.PersonService;
 import org.acme.data.entities.Person;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -12,10 +16,13 @@ import java.util.List;
 @Path("/persons")
 public class PersonController {
 
+    @Inject
+    PersonService personService;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(){
-        List<Person> persons = Person.listAll();
+        List<PersonTransferObject.ReadPersonDTO> persons = PersonMapper.map(personService.getAllPersons());
         return Response.ok(persons).build();
     }
 
@@ -23,19 +30,24 @@ public class PersonController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Long personId){
-        return Person.findByIdOptional(personId)
-                .map(person -> Response.ok(person).build())
-                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+        PersonTransferObject.ReadPersonDTO personDTO = PersonMapper.map(personService.getByID(personId));
+        if (personDTO != null){
+            return Response.ok(personDTO).build();
+        }
+        else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 
     @POST
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(Person person){
-        Person.persist(person);
-        if(person.isPersistent()){
-            return Response.created(URI.create("/persons" + person.id)).build();
+    public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO){
+        boolean success = personService.create(personDTO);
+
+        if(success){
+            return Response.created(URI.create("/persons")).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
@@ -46,7 +58,7 @@ public class PersonController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response put(@PathParam("id") Long id, Person person){
-        if (person.firstName.equals("") || person.lastName.equals("") || person.age < 0){
+        if (person.getFirstName().equals("") || person.getLastName().equals("") || person.getAge() < 0){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         Person personToUpdate = Person.findById(id);
@@ -54,9 +66,9 @@ public class PersonController {
         if(personToUpdate == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        personToUpdate.firstName = person.firstName;
-        personToUpdate.lastName = person.lastName;
-        personToUpdate.age = person.age;
+        personToUpdate.setFirstName(person.getFirstName());
+        personToUpdate.setLastName(person.getLastName());
+        personToUpdate.setAge(person.getAge());
 
         personToUpdate.persist();
         if(personToUpdate.isPersistent()){

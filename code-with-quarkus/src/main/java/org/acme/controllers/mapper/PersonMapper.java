@@ -21,8 +21,8 @@ public class PersonMapper {
         return PersonTransferObject.ReadPersonDTO
                 .builder()
                 .id(person.id)
-                .firstName(person.firstName)
-                .lastName(person.lastName)
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
                 .groups(person.getGroups().stream()
                         .map(PersonMapper::mapGroupInPerson)
                         .collect(Collectors.toList())

@@ -33,9 +33,9 @@ public class GroupMapper {
         return GroupTransferObject.MemberInGroupDTO
                 .builder()
                 .id(person.id)
-                .firstName(person.firstName)
-                .lastName(person.lastName)
-                .age(person.age)
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .age(person.getAge())
                 .build();
     }
 
