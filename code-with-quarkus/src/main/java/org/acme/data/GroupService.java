@@ -36,7 +36,7 @@ public class GroupService {
         //addPersonsToGroup(groupTransferObject.getMemberIDs(), group);
 
         group.persist();
-        personService.addToGroup(groupTransferObject.getMemberIDs(), group);
+
 
         return group;
     }

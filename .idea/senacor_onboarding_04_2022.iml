@@ -246,5 +246,6 @@
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-panache-common:2.9.2.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-jdbc-postgresql:2.9.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.3.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.24" level="project" />
   </component>
 </module>
