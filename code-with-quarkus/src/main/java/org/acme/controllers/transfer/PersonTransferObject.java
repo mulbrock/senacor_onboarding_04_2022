@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 public class PersonTransferObject {
 
@@ -15,7 +15,7 @@ public class PersonTransferObject {
         private String firstName;
         private String lastName;
         private int age;
-        private Set<GroupInPersonDTO> groups;
+        private List<GroupInPersonDTO> groups;
     }
 
     @Data
