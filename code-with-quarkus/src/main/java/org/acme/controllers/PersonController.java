@@ -40,7 +40,6 @@ public class PersonController {
     }
 
     @POST
-    @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO){
@@ -53,26 +52,16 @@ public class PersonController {
     }
 
     @PUT
-    @Transactional
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response put(@PathParam("id") Long id, Person person){
-        if (person.getFirstName().equals("") || person.getLastName().equals("") || person.getAge() < 0){
+    public Response put(@PathParam("id") Long id, PersonTransferObject.CreateUpdatePersonDTO personDTO){
+        if (personDTO.getFirstName().equals("") || personDTO.getLastName().equals("") || personDTO.getAge() < 0){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
-        Person personToUpdate = Person.findById(id);
-
-        if(personToUpdate == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        personToUpdate.setFirstName(person.getFirstName());
-        personToUpdate.setLastName(person.getLastName());
-        personToUpdate.setAge(person.getAge());
-
-        personToUpdate.persist();
-        if(personToUpdate.isPersistent()){
-            return Response.created(URI.create("/persons" + person.id)).build();
+        boolean success = personService.updateByID(id, personDTO);
+        if (success){
+            return Response.created(URI.create("/persons")).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
