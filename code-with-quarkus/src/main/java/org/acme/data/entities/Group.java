@@ -1,7 +1,6 @@
 package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,7 @@ import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+
 @Entity
 public class Group extends PanacheEntity {
 
@@ -33,4 +32,19 @@ public class Group extends PanacheEntity {
         this.members = members;
     }
 
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public LocalDateTime getMeetingTime() {
+        return meetingTime;
+    }
+
+    public void setMeetingTime(LocalDateTime meetingTime) {
+        this.meetingTime = meetingTime;
+    }
 }

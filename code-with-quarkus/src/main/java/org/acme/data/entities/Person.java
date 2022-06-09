@@ -1,12 +1,10 @@
 package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
 @Entity
 public class Person extends PanacheEntity {
 
@@ -35,5 +33,33 @@ public class Person extends PanacheEntity {
 
     public Set<Group> getGroups(){
         return this.groups;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 }
