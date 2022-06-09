@@ -14,10 +14,6 @@ public class Person extends PanacheEntity {
     public String lastName;
     @Column
     public int age;
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
     @JoinTable(
             name = "person_group",
             joinColumns = { @JoinColumn(name = "person_id") },
@@ -28,6 +24,14 @@ public class Person extends PanacheEntity {
                     )
             }
     )
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {
+                CascadeType.MERGE
+    })
     private Set<Group>groups;
 
+    public Set<Group> getGroups(){
+        return this.groups;
+    }
 }
