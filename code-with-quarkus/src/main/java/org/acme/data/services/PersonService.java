@@ -6,6 +6,7 @@ import org.acme.data.entities.Person;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 
 @ApplicationScoped
@@ -58,6 +59,24 @@ public class PersonService {
                 group.getMembers().add(person);
             }
         }
+    }
+
+    public static class RandomPersonGenerator{
+
+        @Transactional
+        public static List<Person> generatePersons(){
+            List<Person> persons = new LinkedList<>();
+            for (int i = 0; i < 10; i++){
+                Person person = new Person();
+                person.setFirstName("Person " + i);
+                person.setLastName("LastName " + i);
+                person.setAge(i);
+                person.persist();
+                persons.add(person);
+            }
+            return persons;
+        }
+
     }
 
 }

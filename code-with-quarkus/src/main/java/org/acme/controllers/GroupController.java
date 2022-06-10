@@ -3,6 +3,7 @@ package org.acme.controllers;
 import org.acme.controllers.mapper.GroupMapper;
 import org.acme.controllers.transfer.GroupTransferObject;
 import org.acme.data.services.GroupService;
+import org.acme.data.services.PersonService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,6 +16,8 @@ public class GroupController {
 
     @Inject
     GroupService groupService;
+    @Inject
+    PersonService personService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -32,10 +35,12 @@ public class GroupController {
     }
 
     @POST
-    @Path("/new")
+    @Path("/random")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject){
+        PersonService.RandomPersonGenerator.generatePersons();
+
         GroupTransferObject.ReadGroupDTO createdGroup = GroupMapper.map(groupService.createGroup(groupTransferObject));
 
         return Response.ok(createdGroup).build();

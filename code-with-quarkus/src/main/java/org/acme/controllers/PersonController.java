@@ -38,6 +38,7 @@ public class PersonController {
     }
 
     @POST
+    @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO){
