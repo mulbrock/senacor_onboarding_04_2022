@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 @Path("/groups")
 public class GroupController {
@@ -35,15 +36,30 @@ public class GroupController {
     }
 
     @POST
-    @Path("/random")
+    @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject){
-        PersonService.RandomPersonGenerator.generatePersons();
 
-        GroupTransferObject.ReadGroupDTO createdGroup = GroupMapper.map(groupService.createGroup(groupTransferObject));
-
+        GroupTransferObject.ReadGroupDTO createdGroup = GroupMapper.map(
+                groupService.createGroup(groupTransferObject));
         return Response.ok(createdGroup).build();
+    }
+
+    @POST
+    @Path("/create_random")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createRandom(){
+
+        Set<Long> memberIDs = personService.getAllMemberIDs();
+        if (memberIDs.size() > 1){
+            List<GroupTransferObject.ReadGroupDTO> createdGroups = GroupMapper.map(
+                    groupService.generateRandomGroups(memberIDs));
+            return Response.ok(createdGroups).build();
+        } else {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
 }

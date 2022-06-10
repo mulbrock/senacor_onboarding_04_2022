@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -22,6 +23,7 @@ public class Group extends PanacheEntity {
 
     public Group(){
         this.creationTime = LocalDateTime.now();
+        this.members = new HashSet<>();
     }
 
     public Set<Person> getMembers(){

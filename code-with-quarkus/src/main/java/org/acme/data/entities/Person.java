@@ -3,6 +3,7 @@ package org.acme.data.entities;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,10 @@ public class Person extends PanacheEntity {
                 CascadeType.MERGE
     })
     private Set<Group>groups;
+
+    public Person(){
+        this.groups = new HashSet<>();
+    }
 
     public Set<Group> getGroups(){
         return this.groups;

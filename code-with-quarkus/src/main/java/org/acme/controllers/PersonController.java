@@ -50,6 +50,16 @@ public class PersonController {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
+    @POST
+    @Path("/create_random={amount}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response create(@PathParam("amount") int amount){
+        PersonService.RandomPersonGenerator.generatePersons(amount);
+
+        return Response.created(URI.create("/persons")).build();
+    }
+
     @PUT
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)

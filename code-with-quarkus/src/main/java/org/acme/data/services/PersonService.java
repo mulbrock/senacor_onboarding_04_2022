@@ -7,6 +7,7 @@ import org.acme.data.entities.Person;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PersonService {
@@ -60,7 +61,10 @@ public class PersonService {
         }
     }
 
-
+    public Set<Long> getAllMemberIDs(){
+        List<Person> persons = Person.listAll();
+        return persons.stream().map(person -> person.id).collect(Collectors.toSet());
+    }
     public Set<Long> getRandomPersonIDs(){
         long entriesSize = Person.count();
         Random random = new Random();
@@ -89,7 +93,7 @@ public class PersonService {
         @Transactional
         public static List<Person> generatePersons(int number){
             List<Person> persons = new LinkedList<>();
-            for (int i = 0; i < number; i++){
+            for (int i = 1; i <= number; i++){
                 Person person = new Person();
                 person.setFirstName("Person " + i);
                 person.setLastName("LastName " + i);
