@@ -6,8 +6,7 @@ import org.acme.data.entities.Person;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @ApplicationScoped
 public class PersonService {
@@ -61,12 +60,36 @@ public class PersonService {
         }
     }
 
+
+    public Set<Long> getRandomPersonIDs(){
+        long entriesSize = Person.count();
+        Random random = new Random();
+
+        long groupSize = random.longs(2, entriesSize)
+                .findFirst()
+                .getAsLong();
+
+        Set<Long> personIDSet = new HashSet<>();
+
+        for (long i = 0; i < groupSize; i++){
+            Long personID = random.longs(1, entriesSize)
+                    .findFirst()
+                    .getAsLong();
+
+            Person person = Person.findById(personID);
+            if (person != null){
+                personIDSet.add(personID);
+            }
+        }
+        return personIDSet;
+    }
+
     public static class RandomPersonGenerator{
 
         @Transactional
-        public static List<Person> generatePersons(){
+        public static List<Person> generatePersons(int number){
             List<Person> persons = new LinkedList<>();
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < number; i++){
                 Person person = new Person();
                 person.setFirstName("Person " + i);
                 person.setLastName("LastName " + i);
