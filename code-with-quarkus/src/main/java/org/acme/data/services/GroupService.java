@@ -68,10 +68,13 @@ public class GroupService {
             Set<Group> groups = new HashSet<>();
             for (int i = 1; i <= groupAmount; i++){
                 Group group = new Group();
+
                 LocalDateTime meetingTime = generateRandomDateTime();
                 group.setMeetingTime(meetingTime);
+
                 long groupSize = randomGroupSize(memberIDs);
                 populateGroupWithMembers(memberIDs, group, groupSize);
+
                 groups.add(group);
             }
             return List.copyOf(groups);
@@ -109,10 +112,10 @@ public class GroupService {
 
         private LocalDateTime generateRandomDateTime(){
             LocalDateTime currentDateTime = LocalDateTime.now();
-            int time = this.random.ints(0, 3)
+            int timeOffset = this.random.ints(0, 3)
                     .findFirst().orElse(0);
 
-            switch (time){
+            switch (timeOffset){
                 case 0:
                     long plusHours = this.random.longs(1, 25)
                             .findFirst().orElse(1);
