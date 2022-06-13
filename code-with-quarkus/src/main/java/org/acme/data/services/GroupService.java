@@ -20,7 +20,6 @@ public class GroupService {
     @Inject
     PersonService personService;
 
-    private final RandomGroupGenerator groupGenerator = new RandomGroupGenerator();
     @Transactional
     public Group createGroup(GroupTransferObject.CreateGroupDTO groupTransferObject){
         Group group = new Group();
@@ -37,7 +36,8 @@ public class GroupService {
 
     @Transactional
     public List<Group> generateRandomGroups(Set<Long> memberIDs){
-        return this.groupGenerator.generateRandomGroups(memberIDs);
+        return RandomGroupGenerator.generateRandomGroups(memberIDs);
+
     }
 
     public void addPersonsToGroup(List<Long> personIDs, Group group){
@@ -61,15 +61,16 @@ public class GroupService {
 
     public static class RandomGroupGenerator{
 
-        private final Random random = new Random();
+        private static final Random random = new Random();
 
-        private List<Group> generateRandomGroups(Set<Long> memberIDs){
+
+        private static List<Group> generateRandomGroups(Set<Long> memberIDs){
             int groupAmount = random.nextInt(10);
             Set<Group> groups = new HashSet<>();
             for (int i = 1; i <= groupAmount; i++){
                 Group group = new Group();
 
-                int timeOffset = this.random.ints(0, 3)
+                int timeOffset = random.ints(0, 3)
                         .findFirst().orElse(0);
                 LocalDateTime fromTime = LocalDateTime.now();
                 LocalDateTime meetingTime = generateRandomDateTime(timeOffset, fromTime);
@@ -83,7 +84,7 @@ public class GroupService {
             return List.copyOf(groups);
         }
 
-        public long randomGroupSize(Set<Long> memberIDs){
+        public static long randomGroupSize(Set<Long> memberIDs){
             long maxBound = memberIDs.size();
             if (maxBound > 10){
                 maxBound = 10;
@@ -93,7 +94,7 @@ public class GroupService {
                     .orElse(2);
         }
 
-        public void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize){
+        public static void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize){
             while (group.getMembers().size() < groupSize){
                 long randomID = getRandomPersonID(memberIDs);
                 Person person = Person.findById(randomID);
@@ -105,7 +106,7 @@ public class GroupService {
             }
         }
 
-        public Long getRandomPersonID(Set<Long> memberIDs){
+        public static Long getRandomPersonID(Set<Long> memberIDs){
             int index = random.ints(0, memberIDs.size())
                     .findFirst()
                     .orElse(0);
@@ -113,22 +114,22 @@ public class GroupService {
             return memberArray[index];
         }
 
-        public LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime){
+        public static LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime){
             LocalDateTime currentDateTime = fromTime;
 
             switch (timeOffset){
                 case 0:
-                    long plusHours = this.random.longs(1, 25)
+                    long plusHours = random.longs(1, 25)
                             .findFirst().orElse(1);
                     currentDateTime = currentDateTime.plusHours(plusHours);
                     break;
                 case 1:
-                    long plusDays = this.random.longs(1, 30)
+                    long plusDays = random.longs(1, 30)
                             .findFirst().orElse(1);
                     currentDateTime = currentDateTime.plusDays(plusDays);
                     break;
                 case 2:
-                    long plusWeeks = this.random.longs(1, 12)
+                    long plusWeeks = random.longs(1, 12)
                             .findFirst().orElse(1);
                     currentDateTime = currentDateTime.plusWeeks(plusWeeks);
                     break;
