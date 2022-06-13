@@ -10,12 +10,17 @@ import static org.hamcrest.CoreMatchers.is;
 public class PersonControllerTest {
 
     @Test
-    public void testPersonsEndpoint(){
+    public void testEmptyPersonsEndpoint(){
         given()
                 .when().get("/persons")
                 .then()
                 .statusCode(200)
                 .body(is("[]"));
+    }
+
+    @Test
+    public void testCreatePersonEndpoint(){
+
     }
 
 }

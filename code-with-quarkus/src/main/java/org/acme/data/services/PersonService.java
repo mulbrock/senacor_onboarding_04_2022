@@ -65,28 +65,6 @@ public class PersonService {
         List<Person> persons = Person.listAll();
         return persons.stream().map(person -> person.id).collect(Collectors.toSet());
     }
-    public Set<Long> getRandomPersonIDs(){
-        long entriesSize = Person.count();
-        Random random = new Random();
-
-        long groupSize = random.longs(2, entriesSize)
-                .findFirst()
-                .getAsLong();
-
-        Set<Long> personIDSet = new HashSet<>();
-
-        for (long i = 0; i < groupSize; i++){
-            Long personID = random.longs(1, entriesSize)
-                    .findFirst()
-                    .getAsLong();
-
-            Person person = Person.findById(personID);
-            if (person != null){
-                personIDSet.add(personID);
-            }
-        }
-        return personIDSet;
-    }
 
     public static class RandomPersonGenerator{
 
