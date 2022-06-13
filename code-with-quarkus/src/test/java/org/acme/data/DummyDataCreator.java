@@ -1,9 +1,16 @@
 package org.acme.data;
 
+import org.acme.controllers.transfer.GroupTransferObject;
 import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.entities.Person;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class DummyDataCreator {
+
+    public static final LocalDateTime groupMeetingTime = LocalDateTime.parse("2007-12-03T10:15:30");
 
     public static PersonTransferObject.CreateUpdatePersonDTO createPersonDTO(){
         PersonTransferObject.CreateUpdatePersonDTO personDTO =
@@ -13,6 +20,15 @@ public class DummyDataCreator {
         personDTO.setLastName("Strange");
 
         return personDTO;
+    }
+
+    public static GroupTransferObject.CreateGroupDTO createGroupDTO(){
+        GroupTransferObject.CreateGroupDTO groupDTO = new GroupTransferObject.CreateGroupDTO();
+        groupDTO.setMeetingTime(groupMeetingTime);
+
+        List<Long> memberIDs = new ArrayList<>();
+        groupDTO.setMemberIDs(memberIDs);
+        return groupDTO;
     }
 
 }
