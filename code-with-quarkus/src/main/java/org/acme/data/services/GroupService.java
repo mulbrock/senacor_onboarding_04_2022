@@ -69,7 +69,10 @@ public class GroupService {
             for (int i = 1; i <= groupAmount; i++){
                 Group group = new Group();
 
-                LocalDateTime meetingTime = generateRandomDateTime();
+                int timeOffset = this.random.ints(0, 3)
+                        .findFirst().orElse(0);
+                LocalDateTime fromTime = LocalDateTime.now();
+                LocalDateTime meetingTime = generateRandomDateTime(timeOffset, fromTime);
                 group.setMeetingTime(meetingTime);
 
                 long groupSize = randomGroupSize(memberIDs);
@@ -80,7 +83,7 @@ public class GroupService {
             return List.copyOf(groups);
         }
 
-        private long randomGroupSize(Set<Long> memberIDs){
+        public long randomGroupSize(Set<Long> memberIDs){
             long maxBound = memberIDs.size();
             if (maxBound > 10){
                 maxBound = 10;
@@ -90,7 +93,7 @@ public class GroupService {
                     .orElse(2);
         }
 
-        private void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize){
+        public void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize){
             while (group.getMembers().size() < groupSize){
                 long randomID = getRandomPersonID(memberIDs);
                 Person person = Person.findById(randomID);
@@ -102,7 +105,7 @@ public class GroupService {
             }
         }
 
-        private Long getRandomPersonID(Set<Long> memberIDs){
+        public Long getRandomPersonID(Set<Long> memberIDs){
             int index = random.ints(0, memberIDs.size())
                     .findFirst()
                     .orElse(0);
@@ -110,10 +113,8 @@ public class GroupService {
             return memberArray[index];
         }
 
-        private LocalDateTime generateRandomDateTime(){
-            LocalDateTime currentDateTime = LocalDateTime.now();
-            int timeOffset = this.random.ints(0, 3)
-                    .findFirst().orElse(0);
+        public LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime){
+            LocalDateTime currentDateTime = fromTime;
 
             switch (timeOffset){
                 case 0:
