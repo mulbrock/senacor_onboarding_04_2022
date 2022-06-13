@@ -51,10 +51,9 @@ public class PersonController {
     }
 
     @POST
-    @Path("/create_random={amount}")
+    @Path("/create_random")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(@PathParam("amount") int amount){
+    public Response create(@QueryParam("amount") int amount){
         PersonService.RandomPersonGenerator.generatePersons(amount);
 
         return Response.created(URI.create("/persons")).build();
