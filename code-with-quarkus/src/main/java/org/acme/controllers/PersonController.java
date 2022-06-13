@@ -69,7 +69,7 @@ public class PersonController {
         }
         boolean success = personService.updateByID(id, personDTO);
         if (success){
-            return Response.created(URI.create("/persons")).build();
+            return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
