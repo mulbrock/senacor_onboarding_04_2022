@@ -72,17 +72,7 @@ public class RandomGroupGenerator {
                 .findFirst()
                 .orElse(0);
     }
-
-    /**
-     * Generates a DateTime. Enter 0, 1 or 2.
-     * 0 adds random hours to given date,
-     * 1 adds random days to given date,
-     * 2 adds random weeks to given date.
-     *
-     * @param timeOffset --> 0, 1, 2
-     * @param fromTime   --> DateTime
-     * @return
-     */
+    
     public static LocalDateTime generateRandomMeetingDateTime(DateOffset timeOffset, LocalDateTime fromTime) {
         LocalDateTime currentDateTime = fromTime;
 
