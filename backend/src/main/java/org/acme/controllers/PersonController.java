@@ -5,6 +5,7 @@ import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.services.PersonService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -40,7 +41,7 @@ public class PersonController {
     @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO) {
+    public Response create(@Valid PersonTransferObject.CreateUpdatePersonDTO personDTO) {
         boolean success = personService.create(personDTO);
 
         if (success) {
@@ -62,7 +63,7 @@ public class PersonController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response put(@PathParam("id") Long id, PersonTransferObject.CreateUpdatePersonDTO personDTO) {
+    public Response put(@PathParam("id") Long id, @Valid PersonTransferObject.CreateUpdatePersonDTO personDTO) {
         if (personDTO.getFirstName().equals("") || personDTO.getLastName().equals("") || personDTO.getAge() < 0) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

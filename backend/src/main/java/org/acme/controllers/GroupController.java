@@ -6,6 +6,7 @@ import org.acme.data.services.GroupService;
 import org.acme.data.services.PersonService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -39,7 +40,7 @@ public class GroupController {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject) {
+    public Response create(@Valid GroupTransferObject.CreateGroupDTO groupTransferObject) {
 
         GroupTransferObject.ReadGroupDTO createdGroup = GroupMapper.map(
                 groupService.createGroup(groupTransferObject));
