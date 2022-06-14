@@ -91,7 +91,7 @@ public class GroupService {
             if (maxBound > 10) {
                 maxBound = 10;
             }
-            return random.longs(2, maxBound)
+            return random.longs(2, maxBound + 1)
                     .findFirst()
                     .orElse(2);
         }
