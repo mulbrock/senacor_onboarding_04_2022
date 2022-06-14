@@ -1,8 +1,11 @@
-package org.acme.data;
+package org.acme.data.services;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.controllers.transfer.PersonTransferObject;
+import org.acme.data.DatabaseTest;
+import org.acme.data.DummyDataCreator;
+import org.acme.data.PostgresDB;
 import org.acme.data.entities.Person;
 import org.acme.data.services.PersonService;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +17,7 @@ import java.util.Set;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresDB.class)
-public class PersonServiceTest extends DatabaseTest{
+public class PersonServiceDatalayerTest extends DatabaseTest {
 
     @Inject
     PersonService personService;

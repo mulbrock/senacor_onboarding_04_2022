@@ -1,9 +1,13 @@
-package org.acme.data;
+package org.acme.data.services;
 
+import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.controllers.transfer.GroupTransferObject;
 import org.acme.controllers.transfer.PersonTransferObject;
+import org.acme.data.DummyDataCreator;
+import org.acme.data.PostgresDB;
+import org.acme.data.entities.Person;
 import org.acme.data.services.GroupService;
 import org.acme.data.services.PersonService;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +19,7 @@ import java.util.List;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresDB.class)
-public class GroupServiceTest {
+public class GroupServiceDatalayerTest {
 
     @Inject
     GroupService groupService;
