@@ -22,6 +22,17 @@ public class DummyDataCreator {
         return personDTO;
     }
 
+    public static Person createDummyPerson(){
+
+        Person person = new Person();
+        person.id = 12L;
+        person.setFirstName("Frida");
+        person.setLastName("Stralau");
+        person.setAge(32);
+
+        return person;
+    }
+
     public static GroupTransferObject.CreateGroupDTO createGroupDTO(){
         GroupTransferObject.CreateGroupDTO groupDTO = new GroupTransferObject.CreateGroupDTO();
         groupDTO.setMeetingTime(groupMeetingTime);

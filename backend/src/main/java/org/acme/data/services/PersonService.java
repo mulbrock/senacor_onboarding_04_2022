@@ -34,7 +34,7 @@ public class PersonService {
         if (personToUpdate != null){
             populateDataFromDTO(personToUpdate, personDTO);
             personToUpdate.persist();
-            return personToUpdate.isPersistent();
+            return true;
         }
         return false;
     }
@@ -44,11 +44,12 @@ public class PersonService {
         return Person.deleteById(personID);
     }
 
-    private void populateDataFromDTO(Person person,
+    public boolean populateDataFromDTO(Person person,
                                      PersonTransferObject.CreateUpdatePersonDTO personDTO){
         person.setFirstName(personDTO.getFirstName());
         person.setLastName(personDTO.getLastName());
         person.setAge(personDTO.getAge());
+        return true;
     }
 
     public void addToGroup(List<Long> personIDs, Group group){
