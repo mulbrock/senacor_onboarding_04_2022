@@ -44,15 +44,15 @@ public class PersonService {
         return Person.deleteById(personID);
     }
 
-    public boolean populateDataFromDTO(Person person,
+    public Person populateDataFromDTO(Person person,
                                      PersonTransferObject.CreateUpdatePersonDTO personDTO){
         person.setFirstName(personDTO.getFirstName());
         person.setLastName(personDTO.getLastName());
         person.setAge(personDTO.getAge());
-        return true;
+        return person;
     }
 
-    public void addToGroup(List<Long> personIDs, Group group){
+    public Group addToGroup(List<Long> personIDs, Group group){
         for(Long id : personIDs){
             Person person = getByID(id);
             if (person != null){
@@ -60,6 +60,7 @@ public class PersonService {
                 group.getMembers().add(person);
             }
         }
+        return group;
     }
 
     public Set<Long> getAllMemberIDs(){

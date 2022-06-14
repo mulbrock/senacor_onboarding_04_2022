@@ -2,10 +2,12 @@ package org.acme.data;
 
 import org.acme.controllers.transfer.GroupTransferObject;
 import org.acme.controllers.transfer.PersonTransferObject;
+import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class DummyDataCreator {
@@ -40,6 +42,14 @@ public class DummyDataCreator {
         List<Long> memberIDs = new ArrayList<>();
         groupDTO.setMemberIDs(memberIDs);
         return groupDTO;
+    }
+
+    public static Group createDummyGroup(){
+        Group group = new Group();
+        group.setMeetingTime(groupMeetingTime);
+        group.setMembers(new HashSet<>());
+
+        return group;
     }
 
 }

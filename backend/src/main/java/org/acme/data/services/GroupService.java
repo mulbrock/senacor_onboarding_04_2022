@@ -40,13 +40,14 @@ public class GroupService {
 
     }
 
-    public void addPersonsToGroup(List<Long> personIDs, Group group){
+    public Group addPersonsToGroup(List<Long> personIDs, Group group){
         for(Long personID : personIDs){
             Person person = Person.findById(personID);
             if (person != null){
                 group.getMembers().add(person);
             }
         }
+        return group;
     }
 
     public List<GroupTransferObject.ReadGroupDTO> getAllGroups(){

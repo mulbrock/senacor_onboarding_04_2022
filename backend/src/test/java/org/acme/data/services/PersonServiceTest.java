@@ -50,7 +50,6 @@ public class PersonServiceTest {
         personUpdates.setAge(12);
 
         Mockito.when(Person.findById(id)).thenReturn(dummyPerson);
-        Mockito.doNothing().when(session).persist(Mockito.any());
         Mockito.when(personService.updateByID(id, personUpdates)).thenCallRealMethod();
         Mockito.when(personService.populateDataFromDTO(dummyPerson, personUpdates)).thenCallRealMethod();
 
