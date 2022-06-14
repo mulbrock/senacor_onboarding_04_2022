@@ -18,17 +18,16 @@ public class RandomGroupGenerator {
     public static Random random = new Random();
 
     public static List<Group> generateRandomGroups(Set<Long> memberIDs) {
-        int groupAmount = random.nextInt(10);
+        int groupAmount = generateRandomInt(1, 10);
 
         Set<Group> groups = new HashSet<>();
 
         for (int i = 1; i <= groupAmount; i++) {
             Group group = new Group();
 
-            int timeOffset = random.ints(0, 3)
-                    .findFirst().orElse(0);
             LocalDateTime fromTime = LocalDateTime.now();
-            LocalDateTime meetingTime = generateRandomMeetingDateTime(DateOffset.values()[timeOffset], fromTime);
+            DateOffset timeToJump = DateOffset.values()[generateRandomInt(0, 3)];
+            LocalDateTime meetingTime = generateRandomMeetingDateTime(timeToJump, fromTime);
             group.setMeetingTime(meetingTime);
 
             long groupSize = randomGroupSize(memberIDs);
@@ -63,12 +62,12 @@ public class RandomGroupGenerator {
     }
 
     public static Long getRandomPersonID(Set<Long> memberIDs) {
-        int index = getRandomInt(0, memberIDs.size());
+        int index = generateRandomInt(0, memberIDs.size());
         Long[] memberArray = memberIDs.toArray(new Long[0]);
         return memberArray[index];
     }
 
-    public static int getRandomInt(int min, int max) {
+    public static int generateRandomInt(int min, int max) {
         return random.ints(min, max)
                 .findFirst()
                 .orElse(0);
