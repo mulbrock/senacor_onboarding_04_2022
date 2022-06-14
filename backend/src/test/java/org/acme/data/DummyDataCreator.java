@@ -14,7 +14,7 @@ public class DummyDataCreator {
 
     public static final LocalDateTime groupMeetingTime = LocalDateTime.parse("2007-12-03T10:15:30");
 
-    public static PersonTransferObject.CreateUpdatePersonDTO createPersonDTO(){
+    public static PersonTransferObject.CreateUpdatePersonDTO createPersonDTO() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO =
                 new PersonTransferObject.CreateUpdatePersonDTO();
         personDTO.setAge(22);
@@ -24,7 +24,7 @@ public class DummyDataCreator {
         return personDTO;
     }
 
-    public static Person createDummyPerson(){
+    public static Person createDummyPerson() {
 
         Person person = new Person();
         person.id = 12L;
@@ -35,7 +35,7 @@ public class DummyDataCreator {
         return person;
     }
 
-    public static GroupTransferObject.CreateGroupDTO createGroupDTO(){
+    public static GroupTransferObject.CreateGroupDTO createGroupDTO() {
         GroupTransferObject.CreateGroupDTO groupDTO = new GroupTransferObject.CreateGroupDTO();
         groupDTO.setMeetingTime(groupMeetingTime);
 
@@ -44,7 +44,7 @@ public class DummyDataCreator {
         return groupDTO;
     }
 
-    public static Group createDummyGroup(){
+    public static Group createDummyGroup() {
         Group group = new Group();
         group.setMeetingTime(groupMeetingTime);
         group.setMembers(new HashSet<>());

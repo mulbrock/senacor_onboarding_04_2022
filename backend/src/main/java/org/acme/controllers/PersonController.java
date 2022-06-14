@@ -19,7 +19,7 @@ public class PersonController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(){
+    public Response getAll() {
         List<PersonTransferObject.ReadPersonDTO> persons = PersonMapper.map(personService.getAllPersons());
         return Response.ok(persons).build();
     }
@@ -27,12 +27,11 @@ public class PersonController {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") Long personId){
+    public Response getById(@PathParam("id") Long personId) {
         PersonTransferObject.ReadPersonDTO personDTO = PersonMapper.map(personService.getByID(personId));
-        if (personDTO != null){
+        if (personDTO != null) {
             return Response.ok(personDTO).build();
-        }
-        else {
+        } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
@@ -41,10 +40,10 @@ public class PersonController {
     @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO){
+    public Response create(PersonTransferObject.CreateUpdatePersonDTO personDTO) {
         boolean success = personService.create(personDTO);
 
-        if(success){
+        if (success) {
             return Response.created(URI.create("/persons")).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -53,7 +52,7 @@ public class PersonController {
     @POST
     @Path("/create_random")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(@QueryParam("amount") int amount){
+    public Response create(@QueryParam("amount") int amount) {
         PersonService.RandomPersonGenerator.generatePersons(amount);
 
         return Response.created(URI.create("/persons")).build();
@@ -63,12 +62,12 @@ public class PersonController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response put(@PathParam("id") Long id, PersonTransferObject.CreateUpdatePersonDTO personDTO){
-        if (personDTO.getFirstName().equals("") || personDTO.getLastName().equals("") || personDTO.getAge() < 0){
+    public Response put(@PathParam("id") Long id, PersonTransferObject.CreateUpdatePersonDTO personDTO) {
+        if (personDTO.getFirstName().equals("") || personDTO.getLastName().equals("") || personDTO.getAge() < 0) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         boolean success = personService.updateByID(id, personDTO);
-        if (success){
+        if (success) {
             return Response.status(Response.Status.OK).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -77,9 +76,9 @@ public class PersonController {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteById(@PathParam("id") Long id){
+    public Response deleteById(@PathParam("id") Long id) {
         boolean deleted = personService.deleteByID(id);
-        if (deleted){
+        if (deleted) {
             return Response.noContent().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();

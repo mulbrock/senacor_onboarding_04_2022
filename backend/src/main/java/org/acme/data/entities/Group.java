@@ -25,7 +25,7 @@ public class Group extends PanacheEntity {
     @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<Person> members;
 
-    public Group(){
+    public Group() {
         this.creationTime = LocalDateTime.now();
         this.members = new HashSet<>();
     }

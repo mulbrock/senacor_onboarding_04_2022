@@ -4,7 +4,6 @@ import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import org.acme.controllers.transfer.GroupTransferObject;
-import org.acme.controllers.transfer.PersonTransferObject;
 import org.acme.data.DummyDataCreator;
 import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
@@ -14,10 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 @QuarkusTest
 public class GroupServiceTest {
@@ -25,18 +24,17 @@ public class GroupServiceTest {
     @InjectMock
     Session session;
 
-    private GroupService groupService = Mockito.mock(GroupService.class);
-    private PersonService personService = Mockito.mock(PersonService.class);
+    @InjectMock
+    GroupService groupService;
 
     @BeforeEach
-    public void setup(){
-        Query mockQuery = Mockito.mock(Query.class);
+    public void setup() {
         Mockito.doNothing().when(session).persist(Mockito.any());
         PanacheMock.mock(Person.class);
     }
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
         GroupTransferObject.CreateGroupDTO groupDTO = DummyDataCreator.createGroupDTO();
 
         Group groupToCreate = new Group();
@@ -48,7 +46,7 @@ public class GroupServiceTest {
     }
 
     @Test
-    public void testAddPersonsToGroup(){
+    public void testAddPersonsToGroup() {
         Person dummyPerson = DummyDataCreator.createDummyPerson();
         Group dummyGroup = DummyDataCreator.createDummyGroup();
 
@@ -66,5 +64,11 @@ public class GroupServiceTest {
         Assertions.assertTrue(dummyGroup.getMembers().contains(dummyPerson));
     }
 
+    @Test
+    public void testGenerateRandomDateTime() {
+        Random random = Mockito.mock(Random.class);
 
+
+        //Mockito.when(random.longs(Mockito.any(), Mockito.any())).thenReturn(Stream.of([12L]) )
+    }
 }

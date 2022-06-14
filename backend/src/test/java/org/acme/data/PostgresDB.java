@@ -14,7 +14,7 @@ public class PostgresDB implements QuarkusTestResourceLifecycleManager {
             .withPassword("testpw");
 
     @Override
-    public Map<String, String> start(){
+    public Map<String, String> start() {
         postgresContainer.start();
 
         Map<String, String> dbProperties = new HashMap<>();
@@ -26,7 +26,7 @@ public class PostgresDB implements QuarkusTestResourceLifecycleManager {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         postgresContainer.stop();
     }
 }

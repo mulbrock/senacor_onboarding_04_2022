@@ -21,7 +21,7 @@ public class GroupControllerTest {
     GroupService groupService;
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
         Map<String, Object> groupCreateSettings = new HashMap<>();
         groupCreateSettings.put("meetingTime", DummyDataCreator.groupMeetingTime);
         groupCreateSettings.put("memberIDs", new ArrayList<>().add(1L));

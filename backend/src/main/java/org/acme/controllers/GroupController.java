@@ -22,7 +22,7 @@ public class GroupController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(){
+    public Response getAll() {
         List<GroupTransferObject.ReadGroupDTO> groups = groupService.getAllGroups();
         return Response.ok(groups).build();
     }
@@ -30,7 +30,7 @@ public class GroupController {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getByID(@PathParam("id") Long id){
+    public Response getByID(@PathParam("id") Long id) {
         GroupTransferObject.ReadGroupDTO groupDTO = groupService.getByID(id);
         return Response.ok(groupDTO).build();
     }
@@ -39,7 +39,7 @@ public class GroupController {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject){
+    public Response create(GroupTransferObject.CreateGroupDTO groupTransferObject) {
 
         GroupTransferObject.ReadGroupDTO createdGroup = GroupMapper.map(
                 groupService.createGroup(groupTransferObject));
@@ -50,10 +50,10 @@ public class GroupController {
     @Path("/create_random")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createRandom(){
+    public Response createRandom() {
 
         Set<Long> memberIDs = personService.getAllMemberIDs();
-        if (memberIDs.size() > 1){
+        if (memberIDs.size() > 1) {
             List<GroupTransferObject.ReadGroupDTO> createdGroups = GroupMapper.map(
                     groupService.generateRandomGroups(memberIDs));
             return Response.ok(createdGroups).build();

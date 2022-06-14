@@ -23,7 +23,7 @@ public class PersonControllerTest {
     private static final String path = "/persons";
 
     @Test
-    public void testEmptyPersonsEndpoint(){
+    public void testEmptyPersonsEndpoint() {
         given()
                 .when().get(path)
                 .then()
@@ -32,7 +32,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testCreateRandomPersonsEndpoint(){
+    public void testCreateRandomPersonsEndpoint() {
 
         given()
                 .queryParam("amount", "5")
@@ -43,7 +43,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testCreatePerson(){
+    public void testCreatePerson() {
 
         Map<String, Object> personSettings = new HashMap<>();
         personSettings.put("firstName", "Hans");
@@ -63,7 +63,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testUpdatePerson(){
+    public void testUpdatePerson() {
 
         Map<String, Object> personUpdates = new HashMap<>();
         personUpdates.put("firstName", "Hans");
@@ -89,7 +89,7 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         personService.create(DummyDataCreator.createPersonDTO());
 
         given()

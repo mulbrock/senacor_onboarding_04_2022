@@ -9,14 +9,14 @@ import java.util.List;
 public class GroupTransferObject {
 
     @Data
-    public static class CreateGroupDTO{
+    public static class CreateGroupDTO {
         private LocalDateTime meetingTime;
         private List<Long> memberIDs;
     }
 
     @Data
     @Builder
-    public static class ReadGroupDTO{
+    public static class ReadGroupDTO {
         private Long id;
         private LocalDateTime creationTime;
         private LocalDateTime meetingTime;
@@ -25,7 +25,7 @@ public class GroupTransferObject {
 
     @Data
     @Builder
-    public static class MemberInGroupDTO{
+    public static class MemberInGroupDTO {
 
         private Long id;
         private String firstName;

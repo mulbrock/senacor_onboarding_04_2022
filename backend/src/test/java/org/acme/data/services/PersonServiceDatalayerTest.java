@@ -7,7 +7,6 @@ import org.acme.data.DatabaseTest;
 import org.acme.data.DummyDataCreator;
 import org.acme.data.PostgresDB;
 import org.acme.data.entities.Person;
-import org.acme.data.services.PersonService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +22,7 @@ public class PersonServiceDatalayerTest extends DatabaseTest {
     PersonService personService;
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO = DummyDataCreator.createPersonDTO();
         personService.create(personDTO);
 
@@ -38,7 +37,7 @@ public class PersonServiceDatalayerTest extends DatabaseTest {
     }
 
     @Test
-    public void testDeleteByID(){
+    public void testDeleteByID() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO = DummyDataCreator.createPersonDTO();
         personService.create(personDTO);
 
@@ -53,7 +52,7 @@ public class PersonServiceDatalayerTest extends DatabaseTest {
     }
 
     @Test
-    public void updateByID(){
+    public void updateByID() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO = DummyDataCreator.createPersonDTO();
         personService.create(personDTO);
 
@@ -81,7 +80,7 @@ public class PersonServiceDatalayerTest extends DatabaseTest {
     }
 
     @Test
-    public void testGetAllMemberIDs(){
+    public void testGetAllMemberIDs() {
         PersonTransferObject.CreateUpdatePersonDTO personDTOone = DummyDataCreator.createPersonDTO();
         personService.create(personDTOone);
 
@@ -106,7 +105,7 @@ public class PersonServiceDatalayerTest extends DatabaseTest {
     }
 
     @Test
-    public void testAddToGroup(){
+    public void testAddToGroup() {
 
     }
 }

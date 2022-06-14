@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 public class GroupMapper {
 
-    public static List<GroupTransferObject.ReadGroupDTO> map(List<Group> groups){
+    public static List<GroupTransferObject.ReadGroupDTO> map(List<Group> groups) {
         return groups.stream().map(GroupMapper::map).collect(Collectors.toList());
     }
 
-    public static GroupTransferObject.ReadGroupDTO map(Group group){
-        if (group == null){
+    public static GroupTransferObject.ReadGroupDTO map(Group group) {
+        if (group == null) {
             return null;
         }
 
@@ -29,7 +29,7 @@ public class GroupMapper {
                 .build();
     }
 
-    private static GroupTransferObject.MemberInGroupDTO mapToMemberInGroupDTO(Person person){
+    private static GroupTransferObject.MemberInGroupDTO mapToMemberInGroupDTO(Person person) {
         return GroupTransferObject.MemberInGroupDTO
                 .builder()
                 .id(person.id)

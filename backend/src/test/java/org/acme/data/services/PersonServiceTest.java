@@ -12,25 +12,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.persistence.Query;
-
 @QuarkusTest
 public class PersonServiceTest {
 
     @InjectMock
     Session session;
 
-    private PersonService personService = Mockito.mock(PersonService.class);
+    @InjectMock
+    PersonService personService;
 
     @BeforeEach
-    public void setup(){
-        Query mockQuery = Mockito.mock(Query.class);
+    public void setup() {
         Mockito.doNothing().when(session).persist(Mockito.any());
     }
 
-
     @Test
-    public void testCreate(){
+    public void testCreate() {
         PersonTransferObject.CreateUpdatePersonDTO personToCreate = DummyDataCreator.createPersonDTO();
 
         Mockito.when(personService.create(personToCreate)).thenReturn(true);
@@ -38,7 +35,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void testUpdateByID(){
+    public void testUpdateByID() {
         PanacheMock.mock(Person.class);
 
         long id = 12L;
@@ -61,14 +58,14 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void testDeleteByID(){
+    public void testDeleteByID() {
         long id = 12L;
         Mockito.when(personService.deleteByID(id)).thenReturn(true);
         Assertions.assertTrue(personService.deleteByID(id));
     }
 
     @Test
-    public void testPopulateDataFromDTO(){
+    public void testPopulateDataFromDTO() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO = new PersonTransferObject.CreateUpdatePersonDTO();
         Person person = new Person();
         personService.populateDataFromDTO(person, personDTO);
@@ -77,7 +74,6 @@ public class PersonServiceTest {
         Assertions.assertEquals(person.getLastName(), personDTO.getLastName());
         Assertions.assertEquals(person.getAge(), personDTO.getAge());
     }
-
 
 
 }

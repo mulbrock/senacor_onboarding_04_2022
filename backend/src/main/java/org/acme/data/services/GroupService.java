@@ -21,7 +21,7 @@ public class GroupService {
     PersonService personService;
 
     @Transactional
-    public Group createGroup(GroupTransferObject.CreateGroupDTO groupTransferObject){
+    public Group createGroup(GroupTransferObject.CreateGroupDTO groupTransferObject) {
         Group group = new Group();
         group.setMeetingTime(groupTransferObject.getMeetingTime());
 
@@ -35,40 +35,41 @@ public class GroupService {
     }
 
     @Transactional
-    public List<Group> generateRandomGroups(Set<Long> memberIDs){
+    public List<Group> generateRandomGroups(Set<Long> memberIDs) {
+
         return RandomGroupGenerator.generateRandomGroups(memberIDs);
 
     }
 
-    public Group addPersonsToGroup(List<Long> personIDs, Group group){
-        for(Long personID : personIDs){
+    public Group addPersonsToGroup(List<Long> personIDs, Group group) {
+        for (Long personID : personIDs) {
             Person person = Person.findById(personID);
-            if (person != null){
+            if (person != null) {
                 group.getMembers().add(person);
             }
         }
         return group;
     }
 
-    public List<GroupTransferObject.ReadGroupDTO> getAllGroups(){
+    public List<GroupTransferObject.ReadGroupDTO> getAllGroups() {
         List<Group> groups = Group.listAll();
         return GroupMapper.map(groups);
     }
 
-    public GroupTransferObject.ReadGroupDTO getByID(Long id){
+    public GroupTransferObject.ReadGroupDTO getByID(Long id) {
         Group group = Group.findById(id);
         return GroupMapper.map(group);
     }
 
-    public static class RandomGroupGenerator{
+    public static class RandomGroupGenerator {
 
         private static final Random random = new Random();
 
 
-        private static List<Group> generateRandomGroups(Set<Long> memberIDs){
+        private static List<Group> generateRandomGroups(Set<Long> memberIDs) {
             int groupAmount = random.nextInt(10);
             Set<Group> groups = new HashSet<>();
-            for (int i = 1; i <= groupAmount; i++){
+            for (int i = 1; i <= groupAmount; i++) {
                 Group group = new Group();
 
                 int timeOffset = random.ints(0, 3)
@@ -85,9 +86,9 @@ public class GroupService {
             return List.copyOf(groups);
         }
 
-        public static long randomGroupSize(Set<Long> memberIDs){
+        public static long randomGroupSize(Set<Long> memberIDs) {
             long maxBound = memberIDs.size();
-            if (maxBound > 10){
+            if (maxBound > 10) {
                 maxBound = 10;
             }
             return random.longs(2, maxBound)
@@ -95,19 +96,19 @@ public class GroupService {
                     .orElse(2);
         }
 
-        public static void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize){
-            while (group.getMembers().size() < groupSize){
+        public static void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize) {
+            while (group.getMembers().size() < groupSize) {
                 long randomID = getRandomPersonID(memberIDs);
                 Person person = Person.findById(randomID);
                 boolean success = group.getMembers().add(person);
-                if (success){
+                if (success) {
                     group.persist();
                     person.getGroups().add(group);
                 }
             }
         }
 
-        public static Long getRandomPersonID(Set<Long> memberIDs){
+        public static Long getRandomPersonID(Set<Long> memberIDs) {
             int index = random.ints(0, memberIDs.size())
                     .findFirst()
                     .orElse(0);
@@ -115,10 +116,10 @@ public class GroupService {
             return memberArray[index];
         }
 
-        public static LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime){
+        public static LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime) {
             LocalDateTime currentDateTime = fromTime;
 
-            switch (timeOffset){
+            switch (timeOffset) {
                 case 0:
                     long plusHours = random.longs(1, 25)
                             .findFirst().orElse(1);

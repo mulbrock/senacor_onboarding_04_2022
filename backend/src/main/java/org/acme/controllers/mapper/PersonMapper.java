@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 
 public class PersonMapper {
 
-    public static List<PersonTransferObject.ReadPersonDTO> map(List<Person> persons){
+    public static List<PersonTransferObject.ReadPersonDTO> map(List<Person> persons) {
         return persons.stream().map(PersonMapper::map).collect(Collectors.toList());
     }
 
-    public static PersonTransferObject.ReadPersonDTO map(Person person){
+    public static PersonTransferObject.ReadPersonDTO map(Person person) {
         if (person == null) {
             return null;
         }
@@ -30,7 +30,7 @@ public class PersonMapper {
                 .build();
     }
 
-    private static PersonTransferObject.GroupInPersonDTO mapGroupInPerson(Group group){
+    private static PersonTransferObject.GroupInPersonDTO mapGroupInPerson(Group group) {
         return PersonTransferObject.GroupInPersonDTO
                 .builder()
                 .id(group.id)

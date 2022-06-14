@@ -10,22 +10,22 @@ import javax.transaction.Transactional;
 public class DatabaseTest {
 
     @Transactional
-    public Person findPersonByID(Long id){
+    public Person findPersonByID(Long id) {
         return Person.findById(id);
     }
 
     @Transactional
-    public Group findGroupByID(Long id){
+    public Group findGroupByID(Long id) {
         return Group.findById(id);
     }
 
     @Transactional
-    public void savePerson(Person person){
+    public void savePerson(Person person) {
         person.persist();
     }
 
     @Transactional
-    public void saveGroup(Group group){
+    public void saveGroup(Group group) {
         group.persist();
     }
 }
