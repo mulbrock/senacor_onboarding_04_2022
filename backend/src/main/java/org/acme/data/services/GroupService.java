@@ -35,9 +35,11 @@ public class GroupService {
 
     @Transactional
     public List<Group> generateRandomGroups(Set<Long> memberIDs) {
-
-        return RandomGroupGenerator.generateRandomGroups(memberIDs);
-
+        if (memberIDs.size() > 1) {
+            return RandomGroupGenerator.generateRandomGroups(memberIDs);
+        } else {
+            throw new NumberToSmallException();
+        }
     }
 
     public Group addPersonsToGroup(List<Long> personIDs, Group group) {
@@ -60,4 +62,10 @@ public class GroupService {
         return GroupMapper.map(group);
     }
 
+    public static class NumberToSmallException extends RuntimeException {
+        public NumberToSmallException() {
+            super("A group must contain at least two members.");
+        }
+
+    }
 }

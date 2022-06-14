@@ -52,13 +52,14 @@ public class GroupController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createRandom() {
-
         Set<Long> memberIDs = personService.getAllMemberIDs();
-        if (memberIDs.size() > 1) {
+
+        try {
             List<GroupTransferObject.ReadGroupDTO> createdGroups = GroupMapper.map(
                     groupService.generateRandomGroups(memberIDs));
             return Response.ok(createdGroups).build();
-        } else {
+        } catch (GroupService.NumberToSmallException e) {
+            e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
