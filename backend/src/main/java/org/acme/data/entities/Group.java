@@ -1,6 +1,8 @@
 package org.acme.data.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+@Getter
+@Setter
 @Entity
 public class Group extends PanacheEntity {
 
@@ -24,29 +28,5 @@ public class Group extends PanacheEntity {
     public Group(){
         this.creationTime = LocalDateTime.now();
         this.members = new HashSet<>();
-    }
-
-    public Set<Person> getMembers(){
-        return this.members;
-    }
-
-    public void setMembers(Set<Person> members) {
-        this.members = members;
-    }
-
-    public LocalDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(LocalDateTime creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public LocalDateTime getMeetingTime() {
-        return meetingTime;
-    }
-
-    public void setMeetingTime(LocalDateTime meetingTime) {
-        this.meetingTime = meetingTime;
     }
 }
