@@ -11,18 +11,24 @@ import java.util.Set;
 
 public class RandomGroupGenerator {
 
-    private static final Random random = new Random();
+    public enum DateOffset {
+        HOURS, DAYS, WEEKS
+    }
+
+    public static Random random = new Random();
 
     public static List<Group> generateRandomGroups(Set<Long> memberIDs) {
         int groupAmount = random.nextInt(10);
+
         Set<Group> groups = new HashSet<>();
+
         for (int i = 1; i <= groupAmount; i++) {
             Group group = new Group();
 
             int timeOffset = random.ints(0, 3)
                     .findFirst().orElse(0);
             LocalDateTime fromTime = LocalDateTime.now();
-            LocalDateTime meetingTime = generateRandomDateTime(timeOffset, fromTime);
+            LocalDateTime meetingTime = generateRandomMeetingDateTime(DateOffset.values()[timeOffset], fromTime);
             group.setMeetingTime(meetingTime);
 
             long groupSize = randomGroupSize(memberIDs);
@@ -56,33 +62,49 @@ public class RandomGroupGenerator {
     }
 
     public static Long getRandomPersonID(Set<Long> memberIDs) {
-        int index = random.ints(0, memberIDs.size())
-                .findFirst()
-                .orElse(0);
+        int index = getRandomInt(0, memberIDs.size());
         Long[] memberArray = memberIDs.toArray(new Long[0]);
         return memberArray[index];
     }
+    
+    public static int getRandomInt(int min, int max) {
+        return random.ints(min, max)
+                .findFirst()
+                .orElse(0);
+    }
 
-    public static LocalDateTime generateRandomDateTime(int timeOffset, LocalDateTime fromTime) {
+    /**
+     * Generates a DateTime. Enter 0, 1 or 2.
+     * 0 adds random hours to given date,
+     * 1 adds random days to given date,
+     * 2 adds random weeks to given date.
+     *
+     * @param timeOffset --> 0, 1, 2
+     * @param fromTime   --> DateTime
+     * @return
+     */
+    public static LocalDateTime generateRandomMeetingDateTime(DateOffset timeOffset, LocalDateTime fromTime) {
         LocalDateTime currentDateTime = fromTime;
 
         switch (timeOffset) {
-            case 0:
-                long plusHours = random.longs(1, 25)
-                        .findFirst().orElse(1);
+            case HOURS:
+                long plusHours = generateRandomLong(1, 25);
                 currentDateTime = currentDateTime.plusHours(plusHours);
                 break;
-            case 1:
-                long plusDays = random.longs(1, 30)
-                        .findFirst().orElse(1);
+            case DAYS:
+                long plusDays = generateRandomLong(1, 30);
                 currentDateTime = currentDateTime.plusDays(plusDays);
                 break;
-            case 2:
-                long plusWeeks = random.longs(1, 12)
-                        .findFirst().orElse(1);
+            case WEEKS:
+                long plusWeeks = generateRandomLong(1, 10);
                 currentDateTime = currentDateTime.plusWeeks(plusWeeks);
                 break;
         }
         return currentDateTime;
+    }
+
+    public static long generateRandomLong(int min, int max) {
+        return random.longs(min, max)
+                .findFirst().orElse(1);
     }
 }

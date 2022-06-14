@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DummyDataCreator {
 
-    public static final LocalDateTime groupMeetingTime = LocalDateTime.parse("2007-12-03T10:15:30");
+    public static final LocalDateTime groupMeetingTime = LocalDateTime.parse("2026-12-03T10:15:30");
 
     public static PersonTransferObject.CreateUpdatePersonDTO createPersonDTO() {
         PersonTransferObject.CreateUpdatePersonDTO personDTO =
