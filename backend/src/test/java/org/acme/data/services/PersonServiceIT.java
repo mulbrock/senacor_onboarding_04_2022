@@ -16,7 +16,7 @@ import java.util.Set;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresDB.class)
-public class PersonServiceDatalayerTest extends DatabaseTest {
+public class PersonServiceIT extends DatabaseTest {
 
     @Inject
     PersonService personService;

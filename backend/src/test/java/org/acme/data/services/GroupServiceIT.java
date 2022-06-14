@@ -15,7 +15,7 @@ import java.util.List;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresDB.class)
-public class GroupServiceDatalayerTest {
+public class GroupServiceIT {
 
     @Inject
     GroupService groupService;
