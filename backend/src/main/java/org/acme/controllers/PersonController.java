@@ -64,9 +64,6 @@ public class PersonController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response put(@PathParam("id") Long id, @Valid PersonTransferObject.CreateUpdatePersonDTO personDTO) {
-        if (personDTO.getFirstName().equals("") || personDTO.getLastName().equals("") || personDTO.getAge() < 0) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
         boolean success = personService.updateByID(id, personDTO);
         if (success) {
             return Response.status(Response.Status.OK).build();
