@@ -31,6 +31,7 @@ public class DummyDataCreator {
         person.setFirstName("Frida");
         person.setLastName("Stralau");
         person.setAge(32);
+        person.setGroups(new HashSet<>());
 
         return person;
     }

@@ -49,7 +49,7 @@ public class RandomGroupGenerator {
                 .orElse(2);
     }
 
-    public static void populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize) {
+    public static Group populateGroupWithMembers(Set<Long> memberIDs, Group group, long groupSize) {
         while (group.getMembers().size() < groupSize) {
             long randomID = getRandomPersonID(memberIDs);
             Person person = Person.findById(randomID);
@@ -59,6 +59,7 @@ public class RandomGroupGenerator {
                 person.getGroups().add(group);
             }
         }
+        return group;
     }
 
     public static Long getRandomPersonID(Set<Long> memberIDs) {
@@ -66,7 +67,7 @@ public class RandomGroupGenerator {
         Long[] memberArray = memberIDs.toArray(new Long[0]);
         return memberArray[index];
     }
-    
+
     public static int getRandomInt(int min, int max) {
         return random.ints(min, max)
                 .findFirst()
