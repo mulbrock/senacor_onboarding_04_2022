@@ -4,11 +4,11 @@ import {GroupInterface} from "../../../../interfaces/group-interface";
 import {GroupServiceService} from "../../../../services/group-service.service";
 
 @Component({
-  selector: 'app-list-item',
-  templateUrl: './list-item.component.html',
-  styleUrls: ['./list-item.component.css']
+  selector: 'app-person-list-item',
+  templateUrl: './person-list-item.component.html',
+  styleUrls: ['./person-list-item.component.css']
 })
-export class ListItemComponent implements OnInit {
+export class PersonListItemComponent implements OnInit {
 
   @Input() person!: PersonInterface;
   personsGroups: Set<GroupInterface> = new Set<GroupInterface>();

@@ -4,11 +4,11 @@ import {Observable} from "rxjs";
 import {GlobalStateService} from "../../../../services/global-state.service";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-person-list',
+  templateUrl: './person-list.component.html',
+  styleUrls: ['./person-list.component.css']
 })
-export class ListComponent implements OnInit {
+export class PersonListComponent implements OnInit {
 
   public personList!: Observable<Array<PersonInterface>>;
 

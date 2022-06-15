@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GroupInterface} from "../../../../interfaces/group-interface";
 
 @Component({
-  selector: 'app-group',
-  templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  selector: 'app-group-list-item',
+  templateUrl: './group-list-item.component.html',
+  styleUrls: ['./group-list-item.component.css']
 })
-export class GroupComponent implements OnInit {
+export class GroupListItemComponent implements OnInit {
 
   @Input() inputGroup!: GroupInterface;
 
