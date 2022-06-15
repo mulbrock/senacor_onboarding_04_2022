@@ -14,6 +14,7 @@ export class PersonListItemComponent implements OnInit {
   personsGroups: Set<GroupInterface> = new Set<GroupInterface>();
 
   expanded: boolean = false;
+  editMode: boolean = false;
 
   constructor(private groupService: GroupServiceService) { }
 
@@ -25,9 +26,20 @@ export class PersonListItemComponent implements OnInit {
       this.personsGroups = this.groupService.getMatchingGroupsForPerson(this.person.id);
   }
 
-  expand(): void {
-    if (!this.expanded){
-       this.expanded = !this.expanded;
-    }
+  toggleExpand(): void {
+    this.expanded = !this.expanded;
+  }
+
+  toggleEditMode(): void {
+    this.editMode = !this.editMode;
+  }
+
+  saveButtonClicked(): void {
+    this.toggleEditMode();
+  }
+
+  collapse(): void {
+    this.expanded = false;
+    this.editMode = false;
   }
 }

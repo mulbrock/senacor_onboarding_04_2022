@@ -1,5 +1,5 @@
 <article class="person" >
-  <section class="name container" (click)="expand()">
+  <section class="name container" (click)="toggleExpand()">
     <h2>{{this.person.firstName}}</h2>
     <h2>{{this.person.lastName}}</h2>
   </section>
@@ -13,6 +13,12 @@
       <ul *ngFor="let group of this.personsGroups">
         <app-group-list-item [inputGroup]="group"></app-group-list-item>
       </ul>
+    </section>
+    <section class="button container">
+      <button (click)="collapse()">Collapse</button>
+      <button *ngIf="!editMode" (click)="toggleEditMode()">Edit</button>
+      <button *ngIf="editMode" (click)="toggleEditMode()">Discard</button>
+      <button *ngIf="editMode" (click)="saveButtonClicked()">Save</button>
     </section>
   </section>
 </article>
