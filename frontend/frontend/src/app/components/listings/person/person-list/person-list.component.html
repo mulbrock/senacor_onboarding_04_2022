@@ -1,3 +1,7 @@
-<ul *ngFor="let item of this.personList | async">
-  <app-person-list-item [person] = item></app-person-list-item>
-</ul>
+<article>
+  <section class="list container vertical">
+    <ul *ngFor="let item of this.personList | async">
+      <app-person-list-item class="listItem" [person]=item></app-person-list-item>
+    </ul>
+  </section>
+</article>

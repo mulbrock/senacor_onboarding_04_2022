@@ -1,17 +1,18 @@
-<article>
-  <section>
-    <h1>Name</h1>
+<article class="person" >
+  <section class="name container" (click)="expand()">
     <h2>{{this.person.firstName}}</h2>
     <h2>{{this.person.lastName}}</h2>
   </section>
-  <section>
-    <h1>Age</h1>
-    <h2>{{this.person.age}}</h2>
-  </section>
-  <section>
-    <h1>Groups</h1>
-    <ul *ngFor="let group of this.personsGroups">
-      <app-group-list-item [inputGroup]="group"></app-group-list-item>
-    </ul>
+  <section class="details" *ngIf="expanded">
+    <section>
+      <label for="ageInput">Age</label>
+      <input id="ageInput" placeholder="{{this.person.age}}" disabled>
+    </section>
+    <section>
+      <h1>Groups</h1>
+      <ul *ngFor="let group of this.personsGroups">
+        <app-group-list-item [inputGroup]="group"></app-group-list-item>
+      </ul>
+    </section>
   </section>
 </article>

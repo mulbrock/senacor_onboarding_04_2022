@@ -13,6 +13,8 @@ export class PersonListItemComponent implements OnInit {
   @Input() person!: PersonInterface;
   personsGroups: Set<GroupInterface> = new Set<GroupInterface>();
 
+  expanded: boolean = false;
+
   constructor(private groupService: GroupServiceService) { }
 
   ngOnInit(): void {
@@ -21,5 +23,11 @@ export class PersonListItemComponent implements OnInit {
 
   private getPersonsGroups(): void{
       this.personsGroups = this.groupService.getMatchingGroupsForPerson(this.person.id);
+  }
+
+  expand(): void {
+    if (!this.expanded){
+       this.expanded = !this.expanded;
+    }
   }
 }
