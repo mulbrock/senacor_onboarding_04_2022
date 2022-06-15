@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DataService} from "../../../services/data.service";
+import {PersonInterface} from "../../../interfaces/person-interface";
 
 @Component({
   selector: 'app-list-item',
@@ -8,12 +8,11 @@ import {DataService} from "../../../services/data.service";
 })
 export class ListItemComponent implements OnInit {
 
-  @Input() inputItem!: String;
+  @Input() person!: PersonInterface;
 
-  constructor(private dataService: DataService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.dataService.test();
   }
 
 }
