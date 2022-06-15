@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 
-@Path("/persons")
+@Path("/api/persons")
 public class PersonController {
 
     @Inject
