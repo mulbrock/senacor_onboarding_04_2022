@@ -1,7 +1,9 @@
+import {GroupInPersonInterface} from "./group-in-person-interface";
+
 export interface PersonInterface {
-  _id: string;
+  id: string;
   firstName: string;
   lastName: string;
   age: number;
-  groups: [];
+  groups: Array<GroupInPersonInterface>;
 }

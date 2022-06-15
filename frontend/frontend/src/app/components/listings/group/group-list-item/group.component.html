@@ -1,0 +1,9 @@
+<article>
+  <section>
+    <h1>{{this.inputGroup.meetingTime}}</h1>
+    <h1>{{this.inputGroup.id}}</h1>
+    <div *ngFor="let member of inputGroup.groupMembers" >
+      {{member.firstName}}
+    </div>
+  </section>
+</article>

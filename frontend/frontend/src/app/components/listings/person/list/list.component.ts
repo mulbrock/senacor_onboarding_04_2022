@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PersonInterface} from "../../../interfaces/person-interface";
+import {PersonInterface} from "../../../../interfaces/person-interface";
 import {Observable} from "rxjs";
-import {GlobalStateService} from "../../../services/global-state.service";
+import {GlobalStateService} from "../../../../services/global-state.service";
 
 @Component({
   selector: 'app-list',
@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   constructor(private globalStateService: GlobalStateService) { }
 
   ngOnInit(): void {
-    this.personList = this.globalStateService.currentData;
+    this.personList = this.globalStateService.currentPersonData;
   }
 
 }

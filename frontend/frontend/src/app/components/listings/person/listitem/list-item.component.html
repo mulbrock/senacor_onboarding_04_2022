@@ -10,5 +10,8 @@
   </section>
   <section>
     <h1>Groups</h1>
+    <ul *ngFor="let group of this.personsGroups">
+      <app-group [inputGroup]="group"></app-group>
+    </ul>
   </section>
 </article>
