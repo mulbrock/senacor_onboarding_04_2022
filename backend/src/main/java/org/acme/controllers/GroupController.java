@@ -70,7 +70,7 @@ public class GroupController {
         System.out.println("DELETE GROUP: " + id);
         boolean deleted = groupService.deleteByID(id);
         if (deleted) {
-            return Response.ok().build();
+            return Response.noContent().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

@@ -34,7 +34,6 @@ export class DataService {
   }
 
   updatePersonByID(id: string, person: CreateUpdatePersonInterface): Observable<any>{
-    console.log(person)
 
     let httpOptions = {
       headers: new HttpHeaders({
@@ -49,6 +48,18 @@ export class DataService {
 
   getAllGroups(): Observable<any> {
     return this.httpClient.get<Array<ReadGroupInterface>>(this.endpoint + "groups").pipe(
+      catchError(DataService.handleError)
+    );
+  }
+
+  deleteGroup(id: string): Observable<any>{
+    return this.httpClient.delete(this.endpoint + "groups/" + id, {observe: "response"}).pipe(
+      catchError(DataService.handleError)
+    );
+  }
+
+  createRandomGroup(): Observable<any> {
+    return this.httpClient.post<Array<ReadGroupInterface>>(this.endpoint + "groups/create_random", null).pipe(
       catchError(DataService.handleError)
     );
   }

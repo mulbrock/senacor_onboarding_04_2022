@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {ReadGroupInterface} from "../../../../interfaces/read-group-interface";
 import {GlobalStateService} from "../../../../services/global-state.service";
+import {DataService} from "../../../../services/data.service";
 
 @Component({
   selector: 'app-group-list',
@@ -12,7 +13,8 @@ export class GroupListComponent implements OnInit {
 
   public groupList!: Observable<Array<ReadGroupInterface>>;
 
-  constructor(private globalStateService: GlobalStateService) { }
+  constructor(private globalStateService: GlobalStateService,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
     this.groupList = this.globalStateService.currentGroupData;
@@ -20,7 +22,7 @@ export class GroupListComponent implements OnInit {
 
 
   addGroupButtonClicked(): void {
-
+    this.dataService.createRandomGroup().subscribe(() => this.globalStateService.fetchGroupData());
   }
 
 

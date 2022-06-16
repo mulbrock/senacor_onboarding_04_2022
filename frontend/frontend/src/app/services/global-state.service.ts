@@ -30,5 +30,9 @@ export class GlobalStateService {
     .asObservable()
     .pipe(switchMap(() => this.dataService.getAllGroups()));
 
+  public fetchGroupData(){
+    this.refreshCurrentGroupData.next(null);
+  }
+
   constructor(private dataService: DataService) { }
 }
