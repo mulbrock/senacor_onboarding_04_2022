@@ -1,22 +1,21 @@
-<article class="person" >
-  <section class="name container" (click)="expand()">
+<article class="person" (click)="toggleExpand()">
+  <section class="name container" >
     <h2>{{this.person.firstName}}</h2>
     <h2>{{this.person.lastName}}</h2>
   </section>
   <section class="details" *ngIf="expanded">
-    <section class="container">
-      <h2>Age</h2>
+    <section class="container age">
+      <h2>Age: </h2>
       <h2>{{this.person.age}}</h2>
     </section>
-    <section>
-      <h1>Groups</h1>
-      <ul *ngFor="let group of this.personsGroups">
-        <app-group-list-item [inputGroup]="group"></app-group-list-item>
+    <section class="container list">
+      <label id="groupLabel" for="groupList">Groups</label>
+      <ul id="groupList" *ngFor="let group of this.personsGroups">
+       <li>ID: {{group.id}} Meeting time: {{group.meetingTime}}</li>
       </ul>
     </section>
     <section class="button container">
-      <button (click)="collapse()">Collapse</button>
-      <button *ngIf="!editMode" (click)="editButtonClicked()">Edit</button>
+      <button (click)="editButtonClicked()">Edit</button>
     </section>
   </section>
 </article>

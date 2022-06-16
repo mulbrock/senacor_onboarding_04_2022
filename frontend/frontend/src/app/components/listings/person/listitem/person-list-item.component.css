@@ -1,21 +1,49 @@
 .person {
   background-color: white;
   border-radius: 1px;
-  border: transparent 1px solid;
+  border: transparent 3px solid;
 }
 
 .name{
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.age{
+  justify-content: center;
+}
+
+h2 {
+  padding-right: 3px;
+}
+
+#groupLabel {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+.list{
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+ul {
+  list-style-type: none;
+  padding: 2px;
 }
 
 .person:hover{
-  border: white 1px solid;
+  border: #daffe3 3px solid;
 }
 
 .button {
-  padding: 0;
+  padding-top: 20px;
+  width: 100%;
 }
 
-section {
-  padding: 0 10px 0 10px;
+button {
+  width: 100%;
+  padding: 15px;
 }

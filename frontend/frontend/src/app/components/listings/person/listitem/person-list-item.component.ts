@@ -16,7 +16,6 @@ export class PersonListItemComponent implements OnInit {
   personsGroups: Set<ReadGroupInterface> = new Set<ReadGroupInterface>();
 
   expanded: boolean = false;
-  editMode: boolean = false;
 
   constructor(private groupService: GroupServiceService,
               private router: Router) { }
@@ -30,16 +29,15 @@ export class PersonListItemComponent implements OnInit {
   }
 
   expand(): void {
-    this.expanded = true;
+    this.expanded = !this.expanded;
+  }
+
+  toggleExpand(): void {
+    this.expanded = !this.expanded;
   }
 
   editButtonClicked(): void {
     this.router.navigate(["/edit"], {queryParams: {id: this.person.id}})
-  }
-
-  collapse(): void {
-    this.expanded = false;
-    this.editMode = false;
   }
 
   validateForm(): void {

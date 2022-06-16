@@ -6,6 +6,7 @@ import {PersonListComponent} from "./components/listings/person/person-list/pers
 const routes: Routes = [
   { path: "edit", component: EditComponent},
   { path: "create_person", component: EditComponent},
+  { path: "person_list", component: PersonListComponent},
   { path: "**", component: PersonListComponent}
 ]
 

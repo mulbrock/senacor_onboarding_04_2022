@@ -1,4 +1,4 @@
-<article>
+<article id="personListComponent">
   <section class="list container vertical">
     <ul *ngFor="let item of this.personList | async">
       <app-person-list-item class="listItem" [person]=item></app-person-list-item>

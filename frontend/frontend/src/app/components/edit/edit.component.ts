@@ -85,6 +85,7 @@ export class EditComponent implements OnInit {
       } else {
         this.dataService.createPerson(personDTO).subscribe();
       }
+      this.router.navigate(["/person_list"]);
     }
   }
 
