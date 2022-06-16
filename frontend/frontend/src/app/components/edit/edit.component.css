@@ -1,0 +1,54 @@
+input {
+  background-color: transparent;
+  border: none;
+}
+
+.container {
+  margin-bottom: 5px;
+}
+
+.alertInvalid {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-wrap: wrap;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+label {
+  padding-right: 15px;
+}
+
+#formGroupPerson{
+  display: flex;
+  flex-direction: column;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.area {
+  display: flex;
+  flex-direction: row;
+}
+
+input:focus-visible{
+  border-radius: 0;
+  outline: none;
+  background-color: #daffe3;
+}
+
+.form {
+  padding: 5px;
+}
+
+.container{
+  padding: 5px;
+}
+

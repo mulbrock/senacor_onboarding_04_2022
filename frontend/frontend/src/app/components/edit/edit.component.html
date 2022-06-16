@@ -1,0 +1,57 @@
+<article class="vertical container">
+  <section class="form vertical container">
+    <form [formGroup]="personForm" id="formGroupPerson">
+      <div class="input container">
+        <div class="input area">
+          <label for="firstNameInput">First Name</label>
+          <input id="firstNameInput" formControlName="firstName" value="{{person.firstName}}" placeholder="First Name"
+                 required>
+        </div>
+        <div *ngIf="personForm.get('firstName')?.invalid &&
+        (personForm.get('firstName')?.dirty)" class="alertInvalid">
+          <div *ngIf="personForm.get('firstName')?.errors?.['required']">
+            First name is required.
+          </div>
+          <div *ngIf="personForm.get('firstName')?.errors?.['minLength']">
+            Name must be at least 1 character long.
+          </div>
+        </div>
+      </div>
+      <div class="input container">
+        <div class="input area">
+          <label for="lastNameInput">Last Name</label>
+          <input id="lastNameInput" formControlName="lastName" value="{{person.lastName}}" placeholder="Last Name">
+        </div>
+        <div *ngIf="personForm.get('lastName')?.invalid &&
+        (personForm.get('lastName')?.dirty)" class="alertInvalid">
+          <div *ngIf="personForm.get('lastName')?.errors?.['required']">
+            Last name is required <br> (a blank at least).
+          </div>
+          <div *ngIf="personForm.get('lastName')?.errors?.['minLength']">
+            Name must be at least 1 character long.
+          </div>
+        </div>
+      </div>
+      <div class="input container">
+        <div class="inut area">
+          <label for="ageInput">Age</label>
+          <input id="ageInput" formControlName="age" value="{{person.age}}" placeholder="Age">
+        </div>
+        <div *ngIf="personForm.get('age')?.invalid &&
+        (personForm.get('age')?.dirty)" class="alertInvalid">
+          <div *ngIf="personForm.get('age')?.errors?.['required']">
+            Age is required.
+          </div>
+          <div *ngIf="personForm.get('age')?.errors?.['min']">
+           Age must be greater than 0.
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  <section class="button container">
+    <button id="saveButton" (click)="saveButtonClicked()">Save</button>
+    <button id="discardButton" (click)="discardButtonClicked()" [disabled]="!this.personForm.touched">Discard changes</button>
+    <button id="navigateBack" (click)="navigateBackButtonClicked()">Back</button>
+  </section>
+</article>
