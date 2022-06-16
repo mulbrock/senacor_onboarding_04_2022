@@ -1,0 +1,39 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navlist {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-link {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a:link, a:visited {
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+#personsLink {
+  background-color: #daffe3;
+}
+
+#groupsLink {
+  background-color: #fce2d0;
+}

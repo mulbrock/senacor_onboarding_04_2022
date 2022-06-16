@@ -10,6 +10,7 @@ import { PersonListItemComponent } from './components/listings/person/listitem/p
 import { GroupListItemComponent } from './components/listings/group/group-list-item/group-list-item.component';
 import { GroupListComponent } from './components/listings/group/group-list/group-list.component';
 import { EditComponent } from './components/edit/edit.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { EditComponent } from './components/edit/edit.component';
     GroupListItemComponent,
     GroupListComponent,
     EditComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

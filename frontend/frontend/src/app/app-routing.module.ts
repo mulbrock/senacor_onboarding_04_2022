@@ -7,7 +7,7 @@ import {GroupListComponent} from "./components/listings/group/group-list/group-l
 const routes: Routes = [
   { path: "edit", component: EditComponent},
   { path: "create_person", component: EditComponent},
-  { path: "person_list", component: PersonListComponent},
+  { path: "persons", component: PersonListComponent},
   { path: "groups", component: GroupListComponent},
   { path: "**", component: PersonListComponent}
 ]

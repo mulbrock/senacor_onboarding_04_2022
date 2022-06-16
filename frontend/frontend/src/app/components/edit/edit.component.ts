@@ -56,7 +56,7 @@ export class EditComponent implements OnInit {
   }
 
   public navigateBackButtonClicked(): void {
-    this.router.navigate(["/"])
+    this.router.navigate(["/persons"])
   }
 
   public discardButtonClicked(): void {
@@ -85,7 +85,7 @@ export class EditComponent implements OnInit {
       } else {
         this.dataService.createPerson(personDTO).subscribe();
       }
-      this.router.navigate(["/person_list"]);
+      this.router.navigate(["/persons"]);
     }
   }
 
