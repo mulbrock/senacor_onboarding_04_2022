@@ -4,6 +4,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 import {ReadPersonInterface} from "../../interfaces/read-person-interface";
 import {DataService} from "../../services/data.service";
 import {PersonService} from "../../services/person.service";
+import {ReadGroupInterface} from "../../interfaces/read-group-interface";
+import {GroupServiceService} from "../../services/group-service.service";
 
 @Component({
   selector: 'app-edit',
@@ -14,10 +16,12 @@ export class EditComponent implements OnInit {
 
   personForm!: FormGroup;
   person!: ReadPersonInterface;
+  personGroups!: Set<ReadGroupInterface>;
 
   constructor(
     private dataService: DataService,
     private personService: PersonService,
+    private groupService: GroupServiceService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -25,6 +29,8 @@ export class EditComponent implements OnInit {
     this.person = this.createEmptyPerson();
 
     let id = this.route.snapshot.queryParams['id'];
+    this.personGroups = this.groupService.getMatchingGroupsForPerson(id);
+
     this.populateFormFromPersonID(id);
 
     this.personForm = this.createPersonForm();

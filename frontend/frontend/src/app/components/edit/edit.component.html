@@ -48,6 +48,19 @@
         </div>
       </div>
     </form>
+    <details class="group container">
+      <summary>
+
+        Groups
+      </summary>
+      <section >
+        <ul id="groupList">
+          <li *ngFor="let group of this.personGroups">
+            ID: {{group.id}} Time: {{group.meetingTime}}
+          </li>
+        </ul>
+      </section>
+    </details>
   </section>
   <section class="button container">
     <button id="saveButton" (click)="saveButtonClicked()">Save</button>

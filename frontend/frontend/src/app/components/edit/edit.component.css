@@ -52,3 +52,19 @@ input:focus-visible{
   padding: 5px;
 }
 
+.group {
+  background-color: #d0fcfc;
+  display: flex;
+  flex-direction: column;
+}
+
+.group:hover{
+  cursor: default;
+}
+
+ul{
+  padding: 3px;
+  margin: 0;
+  list-style-type: none;
+
+}
