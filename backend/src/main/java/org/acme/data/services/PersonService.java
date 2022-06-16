@@ -46,6 +46,15 @@ public class PersonService {
         return Person.deleteById(personID);
     }
 
+    @Transactional
+    public boolean deleteGroupFromPerson(Long personID, Group group) {
+        Person person = Person.findById(personID);
+        if (person != null) {
+            return person.getGroups().remove(group);
+        }
+        return false;
+    }
+
     public Person populateDataFromDTO(Person person,
                                       PersonTransferObject.CreateUpdatePersonDTO personDTO) {
         person.setFirstName(personDTO.getFirstName());

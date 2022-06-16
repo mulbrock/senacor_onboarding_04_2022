@@ -42,6 +42,15 @@ public class GroupService {
         }
     }
 
+    @Transactional
+    public boolean deleteByID(Long id) {
+        Group group = Group.findById(id);
+        if (group != null) {
+            group.getMembers().forEach(person -> this.personService.deleteGroupFromPerson(person.id, group));
+        }
+        return Group.deleteById(id);
+    }
+
     public Group addPersonsToGroup(List<Long> personIDs, Group group) {
         for (Long personID : personIDs) {
             Person person = Person.findById(personID);
