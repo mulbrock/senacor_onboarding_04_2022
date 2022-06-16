@@ -23,6 +23,7 @@ public class PersonMapper {
                 .id(person.id)
                 .firstName(person.getFirstName())
                 .lastName(person.getLastName())
+                .age(person.getAge())
                 .groups(person.getGroups().stream()
                         .map(PersonMapper::mapGroupInPerson)
                         .collect(Collectors.toList())

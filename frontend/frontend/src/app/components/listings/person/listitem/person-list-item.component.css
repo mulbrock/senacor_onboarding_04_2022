@@ -1,7 +1,21 @@
 .person {
   background-color: #d0fcfc;
+  border-radius: 5px;
+  border: transparent 1px solid;
 }
 
 .name{
   justify-content: space-between;
+}
+
+.person:hover{
+  border: white 1px solid;
+}
+
+.button {
+  padding: 0;
+}
+
+section {
+  padding: 0 10px 0 10px;
 }

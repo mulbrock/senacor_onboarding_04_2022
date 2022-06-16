@@ -1,6 +1,6 @@
 import {GroupInPersonInterface} from "./group-in-person-interface";
 
-export interface PersonInterface {
+export interface ReadPersonInterface {
   id: string;
   firstName: string;
   lastName: string;

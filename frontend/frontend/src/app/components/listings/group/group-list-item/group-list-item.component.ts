@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GroupInterface} from "../../../../interfaces/group-interface";
+import {ReadGroupInterface} from "../../../../interfaces/read-group-interface";
 
 @Component({
   selector: 'app-group-list-item',
@@ -8,7 +8,7 @@ import {GroupInterface} from "../../../../interfaces/group-interface";
 })
 export class GroupListItemComponent implements OnInit {
 
-  @Input() inputGroup!: GroupInterface;
+  @Input() inputGroup!: ReadGroupInterface;
 
   constructor() { }
 

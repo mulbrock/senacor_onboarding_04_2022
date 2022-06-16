@@ -28,7 +28,6 @@ public class Person extends PanacheEntity {
                     )
             }
     )
-
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.MERGE

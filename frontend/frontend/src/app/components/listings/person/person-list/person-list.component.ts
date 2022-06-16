@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PersonInterface} from "../../../../interfaces/person-interface";
+import {ReadPersonInterface} from "../../../../interfaces/read-person-interface";
 import {Observable} from "rxjs";
 import {GlobalStateService} from "../../../../services/global-state.service";
 
@@ -10,7 +10,7 @@ import {GlobalStateService} from "../../../../services/global-state.service";
 })
 export class PersonListComponent implements OnInit {
 
-  public personList!: Observable<Array<PersonInterface>>;
+  public personList!: Observable<Array<ReadPersonInterface>>;
 
   constructor(private globalStateService: GlobalStateService) { }
 

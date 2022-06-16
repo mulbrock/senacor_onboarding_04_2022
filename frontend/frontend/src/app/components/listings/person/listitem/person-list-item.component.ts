@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PersonInterface} from "../../../../interfaces/person-interface";
-import {GroupInterface} from "../../../../interfaces/group-interface";
+
+import {ReadPersonInterface} from "../../../../interfaces/read-person-interface";
+import {ReadGroupInterface} from "../../../../interfaces/read-group-interface";
 import {GroupServiceService} from "../../../../services/group-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-person-list-item',
@@ -10,13 +12,14 @@ import {GroupServiceService} from "../../../../services/group-service.service";
 })
 export class PersonListItemComponent implements OnInit {
 
-  @Input() person!: PersonInterface;
-  personsGroups: Set<GroupInterface> = new Set<GroupInterface>();
+  @Input() person!: ReadPersonInterface;
+  personsGroups: Set<ReadGroupInterface> = new Set<ReadGroupInterface>();
 
   expanded: boolean = false;
   editMode: boolean = false;
 
-  constructor(private groupService: GroupServiceService) { }
+  constructor(private groupService: GroupServiceService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getPersonsGroups();
@@ -26,20 +29,20 @@ export class PersonListItemComponent implements OnInit {
       this.personsGroups = this.groupService.getMatchingGroupsForPerson(this.person.id);
   }
 
-  toggleExpand(): void {
-    this.expanded = !this.expanded;
+  expand(): void {
+    this.expanded = true;
   }
 
-  toggleEditMode(): void {
-    this.editMode = !this.editMode;
-  }
-
-  saveButtonClicked(): void {
-    this.toggleEditMode();
+  editButtonClicked(): void {
+    this.router.navigate(["/edit"], {queryParams: {id: this.person.id}})
   }
 
   collapse(): void {
     this.expanded = false;
     this.editMode = false;
+  }
+
+  validateForm(): void {
+
   }
 }

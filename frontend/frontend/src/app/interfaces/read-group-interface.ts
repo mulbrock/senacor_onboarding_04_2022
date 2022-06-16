@@ -1,6 +1,6 @@
 import {PersonInGroupInterface} from "./person-in-group-interface";
 
-export interface GroupInterface {
+export interface ReadGroupInterface {
   id: string;
   creationTime: string;
   meetingTime: string;

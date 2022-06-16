@@ -64,6 +64,8 @@ public class PersonController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response put(@PathParam("id") Long id, @Valid PersonTransferObject.CreateUpdatePersonDTO personDTO) {
+        System.out.println("PUT CALLED FOR ID: " + id);
+        System.out.println(personDTO);
         boolean success = personService.updateByID(id, personDTO);
         if (success) {
             return Response.status(Response.Status.OK).build();

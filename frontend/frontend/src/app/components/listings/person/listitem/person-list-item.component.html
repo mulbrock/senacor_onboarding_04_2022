@@ -1,12 +1,12 @@
 <article class="person" >
-  <section class="name container" (click)="toggleExpand()">
+  <section class="name container" (click)="expand()">
     <h2>{{this.person.firstName}}</h2>
     <h2>{{this.person.lastName}}</h2>
   </section>
   <section class="details" *ngIf="expanded">
-    <section>
-      <label for="ageInput">Age</label>
-      <input id="ageInput" placeholder="{{this.person.age}}" disabled>
+    <section class="container">
+      <h2>Age</h2>
+      <h2>{{this.person.age}}</h2>
     </section>
     <section>
       <h1>Groups</h1>
@@ -16,9 +16,7 @@
     </section>
     <section class="button container">
       <button (click)="collapse()">Collapse</button>
-      <button *ngIf="!editMode" (click)="toggleEditMode()">Edit</button>
-      <button *ngIf="editMode" (click)="toggleEditMode()">Discard</button>
-      <button *ngIf="editMode" (click)="saveButtonClicked()">Save</button>
+      <button *ngIf="!editMode" (click)="editButtonClicked()">Edit</button>
     </section>
   </section>
 </article>

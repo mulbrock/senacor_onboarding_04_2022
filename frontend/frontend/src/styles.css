@@ -7,3 +7,20 @@
 .vertical {
   flex-direction: column;
 }
+
+button {
+  border: solid black 1px;
+  border-radius: 0;
+  padding: 3px;
+  outline: none;
+}
+
+button:hover{
+  background-color: #e0e0e0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+

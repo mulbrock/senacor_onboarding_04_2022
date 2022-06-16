@@ -1,0 +1,8 @@
+#mainContainer {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+}

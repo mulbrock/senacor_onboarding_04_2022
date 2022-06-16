@@ -79,7 +79,7 @@ public class PersonService {
                 Person person = new Person();
                 person.setFirstName("Person " + i);
                 person.setLastName("LastName " + i);
-                person.setAge(i);
+                person.setAge(30 + i);
                 person.persist();
                 persons.add(person);
             }

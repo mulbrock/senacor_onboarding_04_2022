@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {PersonInterface} from "../interfaces/person-interface";
+import {ReadPersonInterface} from "../interfaces/read-person-interface";
 import {BehaviorSubject, Observable, switchMap} from "rxjs";
 import {DataService} from "./data.service";
-import {GroupInterface} from "../interfaces/group-interface";
+import {ReadGroupInterface} from "../interfaces/read-group-interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalStateService {
 
-  private initialItem: PersonInterface = {
+  private initialItem: ReadPersonInterface = {
     id: "",
     firstName: "",
     lastName: "",
@@ -17,16 +17,16 @@ export class GlobalStateService {
     groups: []
   }
 
-  private person: BehaviorSubject<PersonInterface> = new BehaviorSubject<PersonInterface>(this.initialItem);
+  private person: BehaviorSubject<ReadPersonInterface> = new BehaviorSubject<ReadPersonInterface>(this.initialItem);
   currentPerson = this.person.asObservable();
 
   private refreshCurrentPersonData = new BehaviorSubject(null);
-  currentPersonData: Observable<Array<PersonInterface>> = this.refreshCurrentPersonData
+  currentPersonData: Observable<Array<ReadPersonInterface>> = this.refreshCurrentPersonData
     .asObservable()
     .pipe(switchMap(() => this.dataService.getAllPersons()));
 
   private refreshCurrentGroupData = new BehaviorSubject(null);
-  currentGroupData: Observable<Array<GroupInterface>> = this.refreshCurrentGroupData
+  currentGroupData: Observable<Array<ReadGroupInterface>> = this.refreshCurrentGroupData
     .asObservable()
     .pipe(switchMap(() => this.dataService.getAllGroups()));
 
