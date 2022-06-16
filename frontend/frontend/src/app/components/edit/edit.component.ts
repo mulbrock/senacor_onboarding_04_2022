@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ReadPersonInterface} from "../../interfaces/read-person-interface";
@@ -6,6 +6,7 @@ import {DataService} from "../../services/data.service";
 import {PersonService} from "../../services/person.service";
 import {ReadGroupInterface} from "../../interfaces/read-group-interface";
 import {GroupServiceService} from "../../services/group-service.service";
+import {CreateUpdateState} from "../../enums/create-update-state";
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,8 @@ export class EditComponent implements OnInit {
   person!: ReadPersonInterface;
   personGroups!: Set<ReadGroupInterface>;
 
+  public componentState!: CreateUpdateState;
+
   constructor(
     private dataService: DataService,
     private personService: PersonService,
@@ -28,11 +31,14 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.person = this.createEmptyPerson();
 
-    let id = this.route.snapshot.queryParams['id'];
-    this.personGroups = this.groupService.getMatchingGroupsForPerson(id);
-
-    this.populateFormFromPersonID(id);
-
+    if (!this.router.routerState.snapshot.url.endsWith("/create_person")){
+      this.componentState = CreateUpdateState.UPDATE;
+      let id = this.route.snapshot.queryParams['id'];
+      this.personGroups = this.groupService.getMatchingGroupsForPerson(id);
+      this.populateFormFromPersonID(id);
+    } else {
+      this.componentState = CreateUpdateState.CREATE;
+    }
     this.personForm = this.createPersonForm();
   }
 
@@ -62,6 +68,8 @@ export class EditComponent implements OnInit {
       && this.isFormSectionValid(this.personForm.get("lastName"))
       && this.isFormSectionValid(this.personForm.get("age"))){
 
+      console.log("FORM VALID")
+
       if (this.personForm.get("firstName")?.dirty){
         this.person.firstName = this.personForm.get("firstName")?.value;
       }
@@ -71,18 +79,28 @@ export class EditComponent implements OnInit {
       if (this.personForm.get("age")?.dirty){
         this.person.age = this.personForm.get("age")?.value;
       }
-        let personDTO = this.personService.mapReadPersonToUpdatePerson(this.person);
+      let personDTO = this.personService.mapReadPersonToUpdatePerson(this.person);
+      if (this.componentState == CreateUpdateState.UPDATE){
         this.dataService.updatePersonByID(this.person.id, personDTO).subscribe();
-
+      } else {
+        this.dataService.createPerson(personDTO).subscribe();
+      }
     }
   }
 
   private isFormSectionValid(formSection: AbstractControl | null): boolean {
     if (formSection){
-      if (formSection.untouched){
-        return true;
-      }
-      if (formSection.dirty){
+      if (this.componentState == CreateUpdateState.UPDATE){
+        if (formSection.untouched){
+          return true;
+        }
+        if (formSection.dirty){
+          return formSection.valid;
+        }
+      } else if (this.componentState == CreateUpdateState.CREATE){
+        if (formSection.untouched){
+          return false;
+        }
         return formSection.valid;
       }
     }

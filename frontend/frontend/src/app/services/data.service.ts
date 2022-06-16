@@ -27,6 +27,12 @@ export class DataService {
     );
   }
 
+  createPerson(personDTO: CreateUpdatePersonInterface): Observable<any>{
+    return this.httpClient.post<CreateUpdatePersonInterface>(this.endpoint + "persons/create", personDTO).pipe(
+      catchError(DataService.handleError)
+    );
+  }
+
   updatePersonByID(id: string, person: CreateUpdatePersonInterface): Observable<any>{
     console.log(person)
 

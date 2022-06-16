@@ -4,4 +4,10 @@
       <app-person-list-item class="listItem" [person]=item></app-person-list-item>
     </ul>
   </section>
+  <section class="add container">
+    <button class="material-symbols-outlined" id="addPersonButton"
+            title="Create a new Person" (click)="addPersonButtonClicked()">
+      add_circle
+    </button>
+  </section>
 </article>

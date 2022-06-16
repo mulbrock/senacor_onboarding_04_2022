@@ -1,3 +1,27 @@
-.listItem{
-  padding: 5px;
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.listItem {
+  cursor: pointer;
+}
+
+.add {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+#addPersonButton{
+  width: 100%;
+  background-color: #daffe3;
+  border: 3px solid transparent;
+  padding: 10px;
+  margin: 5px 0 10px 0;
+}
+
+#addPersonButton:hover {
+  border: 3px solid white;
+  cursor: pointer;
 }
