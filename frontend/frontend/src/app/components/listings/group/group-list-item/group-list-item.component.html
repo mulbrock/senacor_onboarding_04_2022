@@ -1,9 +1,16 @@
-<article>
-  <section>
-    <h1>{{this.inputGroup.meetingTime}}</h1>
-    <h1>{{this.inputGroup.id}}</h1>
-    <div *ngFor="let member of inputGroup.groupMembers" >
-      {{member.firstName}}
-    </div>
+<article class="group" (click)="toggleExpand()">
+  <section class="details">
+    <section class="meta container">
+      <h2>ID: {{this.inputGroup.id}}</h2>
+      <h2>Meeting time: {{this.inputGroup.meetingTime}}</h2>
+    </section>
+    <section class="details container" *ngIf="expanded">
+      <label id="groupLabel" for="groupList">Members</label>
+      <ul id="groupList" *ngFor="let member of inputGroup.groupMembers">
+        <li>
+          {{member.firstName}} {{member.lastName}}
+        </li>
+      </ul>
+    </section>
   </section>
 </article>

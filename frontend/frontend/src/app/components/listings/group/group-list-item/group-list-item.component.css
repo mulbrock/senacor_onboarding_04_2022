@@ -1,0 +1,37 @@
+.group {
+  background-color: white;
+  border-radius: 1px;
+  border: transparent 3px solid;
+}
+
+.group:hover{
+  border: #daffe3 3px solid;
+}
+
+ul {
+  list-style-type: none;
+  padding: 2px;
+}
+
+#groupLabel {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+h2 {
+  font-weight: 600;
+  padding: 2px;
+}
+
+.meta {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.details{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

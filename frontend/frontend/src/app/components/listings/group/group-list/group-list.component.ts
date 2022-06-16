@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
+import {ReadGroupInterface} from "../../../../interfaces/read-group-interface";
+import {GlobalStateService} from "../../../../services/global-state.service";
 
 @Component({
   selector: 'app-group-list',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupListComponent implements OnInit {
 
-  constructor() { }
+  public groupList!: Observable<Array<ReadGroupInterface>>;
+
+  constructor(private globalStateService: GlobalStateService) { }
 
   ngOnInit(): void {
+    this.groupList = this.globalStateService.currentGroupData;
   }
+
+
+  addGroupButtonClicked(): void {
+
+  }
+
 
 }

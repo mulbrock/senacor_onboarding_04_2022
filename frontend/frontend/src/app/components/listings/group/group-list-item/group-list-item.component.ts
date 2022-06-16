@@ -9,12 +9,14 @@ import {ReadGroupInterface} from "../../../../interfaces/read-group-interface";
 export class GroupListItemComponent implements OnInit {
 
   @Input() inputGroup!: ReadGroupInterface;
+  expanded = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-
-
+  toggleExpand(): void {
+    this.expanded = !this.expanded;
+  }
 }

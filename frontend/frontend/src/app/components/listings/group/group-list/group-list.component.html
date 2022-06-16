@@ -1,1 +1,13 @@
-<p>group-list works!</p>
+<article id="groupListComponent">
+  <section class="list container vertical">
+    <ul *ngFor="let item of this.groupList | async">
+      <app-group-list-item class="listItem" [inputGroup]="item"></app-group-list-item>
+    </ul>
+  </section>
+  <section class="add container">
+    <button class="material-symbols-outlined" id="addGroupButton"
+            title="Create a new Person" (click)="addGroupButtonClicked()">
+      add_circle
+    </button>
+  </section>
+</article>
