@@ -1,10 +1,12 @@
-input {
-  background-color: transparent;
-  border: none;
-}
-
-.container {
-  margin-bottom: 5px;
+#editComponent {
+  position: fixed;
+  width: 500px;
+  height: max-content;
+  top: 40%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  background-color: white;
 }
 
 .alertInvalid {
@@ -20,6 +22,7 @@ input {
 
 label {
   padding-right: 15px;
+  width: 50%;
 }
 
 #formGroupPerson{
@@ -31,6 +34,13 @@ label {
   display: flex;
   flex-direction: column;
   background-color: white;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #f2ffe0;
+  background-color: #f2ffe0;
+  padding: 5px;
 }
 
 .area {
@@ -52,8 +62,23 @@ input:focus-visible{
   padding: 5px;
 }
 
+.button {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+}
+
+button{
+  width: 100%;
+  border: none;
+  padding: 10px;
+}
+
 .group {
-  background-color: #d0fcfc;
+  background-color: white;
   display: flex;
   flex-direction: column;
 }

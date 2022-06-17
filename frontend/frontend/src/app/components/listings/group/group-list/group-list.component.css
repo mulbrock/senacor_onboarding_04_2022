@@ -1,5 +1,6 @@
 #groupListComponent{
   width: 50vw;
+  padding-top: 110px;
 }
 
 ul {
@@ -19,10 +20,10 @@ ul {
 
 #addGroupButton{
   width: 100%;
-  background-color: #daffe3;
+  background-color: #fce2d0;
   border: 3px solid transparent;
-  padding: 10px;
-  margin: 5px 0 10px 0;
+  padding: 20px;
+  margin: 15px 0 10px 0;
 }
 
 #addGroupButton:hover {

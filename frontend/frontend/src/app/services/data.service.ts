@@ -46,6 +46,12 @@ export class DataService {
     );
   }
 
+  deletePersonByID(id: string): Observable<any> {
+    return this.httpClient.delete(this.endpoint + "persons/" + id, {observe: "response"}).pipe(
+      catchError(DataService.handleError)
+    );
+  }
+
   getAllGroups(): Observable<any> {
     return this.httpClient.get<Array<ReadGroupInterface>>(this.endpoint + "groups").pipe(
       catchError(DataService.handleError)

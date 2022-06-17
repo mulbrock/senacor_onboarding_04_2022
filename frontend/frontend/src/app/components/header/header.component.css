@@ -3,6 +3,13 @@ ul {
   padding: 0;
 }
 
+.navbar {
+  z-index: 990;
+  position: fixed;
+  height: 100px;
+  width: 100%;
+}
+
 .navlist {
   margin: 0;
   display: flex;
@@ -18,7 +25,7 @@ ul {
 }
 
 .nav-link {
-  padding: 20px;
+  padding: 40px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -26,7 +33,6 @@ ul {
 }
 
 a:link, a:visited {
-  text-transform: capitalize;
   text-decoration: none;
 }
 

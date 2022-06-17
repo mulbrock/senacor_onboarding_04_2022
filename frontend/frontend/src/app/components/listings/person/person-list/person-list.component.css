@@ -1,5 +1,7 @@
 #personListComponent{
   width: 50vw;
+  z-index: 800;
+  padding-top: 110px;
 }
 
 ul {
@@ -21,8 +23,8 @@ ul {
   width: 100%;
   background-color: #daffe3;
   border: 3px solid transparent;
-  padding: 10px;
-  margin: 5px 0 10px 0;
+  padding: 20px;
+  margin: 20px 0 10px 0;
 }
 
 #addPersonButton:hover {

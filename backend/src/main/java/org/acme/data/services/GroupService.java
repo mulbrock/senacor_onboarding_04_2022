@@ -49,6 +49,16 @@ public class GroupService {
             group.getMembers().forEach(person -> this.personService.deleteGroupFromPerson(person.id, group));
         }
         return Group.deleteById(id);
+
+    }
+
+    @Transactional
+    public void removeEmptyGroups(Set<Group> groups, Person removedPerson) {
+        groups.forEach(group -> {
+            if (group.getMembers().size() <= 1 && group.getMembers().contains(removedPerson)) {
+                Group.deleteById(group.id);
+            }
+        });
     }
 
     public Group addPersonsToGroup(List<Long> personIDs, Group group) {

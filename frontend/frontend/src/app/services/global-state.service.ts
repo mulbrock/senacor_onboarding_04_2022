@@ -34,5 +34,9 @@ export class GlobalStateService {
     this.refreshCurrentGroupData.next(null);
   }
 
+  public fetchPersonData(){
+    this.refreshCurrentPersonData.next(null);
+  }
+
   constructor(private dataService: DataService) { }
 }

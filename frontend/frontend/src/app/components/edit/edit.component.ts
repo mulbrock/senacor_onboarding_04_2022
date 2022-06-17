@@ -7,6 +7,7 @@ import {PersonService} from "../../services/person.service";
 import {ReadGroupInterface} from "../../interfaces/read-group-interface";
 import {GroupServiceService} from "../../services/group-service.service";
 import {CreateUpdateState} from "../../enums/create-update-state";
+import {GlobalStateService} from "../../services/global-state.service";
 
 @Component({
   selector: 'app-edit',
@@ -25,6 +26,7 @@ export class EditComponent implements OnInit {
     private dataService: DataService,
     private personService: PersonService,
     private groupService: GroupServiceService,
+    private stateService: GlobalStateService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -68,8 +70,6 @@ export class EditComponent implements OnInit {
       && this.isFormSectionValid(this.personForm.get("lastName"))
       && this.isFormSectionValid(this.personForm.get("age"))){
 
-      console.log("FORM VALID")
-
       if (this.personForm.get("firstName")?.dirty){
         this.person.firstName = this.personForm.get("firstName")?.value;
       }
@@ -79,11 +79,15 @@ export class EditComponent implements OnInit {
       if (this.personForm.get("age")?.dirty){
         this.person.age = this.personForm.get("age")?.value;
       }
+
       let personDTO = this.personService.mapReadPersonToUpdatePerson(this.person);
+
       if (this.componentState == CreateUpdateState.UPDATE){
-        this.dataService.updatePersonByID(this.person.id, personDTO).subscribe();
+        this.dataService.updatePersonByID(this.person.id, personDTO)
+          .subscribe(() => this.stateService.fetchPersonData());
       } else {
-        this.dataService.createPerson(personDTO).subscribe();
+        this.dataService.createPerson(personDTO)
+          .subscribe(() => this.stateService.fetchPersonData());
       }
       this.router.navigate(["/persons"]);
     }

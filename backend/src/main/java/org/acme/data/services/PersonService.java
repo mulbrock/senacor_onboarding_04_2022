@@ -5,6 +5,7 @@ import org.acme.data.entities.Group;
 import org.acme.data.entities.Person;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PersonService {
+
+    @Inject
+    GroupService groupService;
 
     public List<Person> getAllPersons() {
         return Person.listAll();
@@ -43,7 +47,13 @@ public class PersonService {
 
     @Transactional
     public boolean deleteByID(Long personID) {
-        return Person.deleteById(personID);
+        Person person = Person.findById(personID);
+        Set<Group> personGroups = person.getGroups();
+        boolean success = Person.deleteById(personID);
+        if (success) {
+            groupService.removeEmptyGroups(personGroups, person);
+        }
+        return success;
     }
 
     @Transactional
@@ -52,6 +62,7 @@ public class PersonService {
         if (person != null) {
             return person.getGroups().remove(group);
         }
+        
         return false;
     }
 

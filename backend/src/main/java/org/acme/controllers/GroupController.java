@@ -53,7 +53,6 @@ public class GroupController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createRandom() {
         Set<Long> memberIDs = personService.getAllMemberIDs();
-
         try {
             List<GroupTransferObject.ReadGroupDTO> createdGroups = GroupMapper.map(
                     groupService.generateRandomGroups(memberIDs));
@@ -67,7 +66,6 @@ public class GroupController {
     @DELETE
     @Path("{id}")
     public Response deleteByID(@PathParam("id") Long id) {
-        System.out.println("DELETE GROUP: " + id);
         boolean deleted = groupService.deleteByID(id);
         if (deleted) {
             return Response.noContent().build();

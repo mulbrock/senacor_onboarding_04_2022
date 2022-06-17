@@ -2,6 +2,7 @@
   background-color: white;
   border-radius: 1px;
   border: transparent 3px solid;
+  z-index: 800;
 }
 
 .name{
@@ -46,4 +47,5 @@ ul {
 button {
   width: 100%;
   padding: 15px;
+  border: none;
 }
